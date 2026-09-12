@@ -1,0 +1,130 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidUserProfile(data) {
+      return data.keys().hasAll(['id', 'email']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.email is string && data.email.size() <= 256 &&
+        (!('createdAt' in data) || (data.createdAt is string && data.createdAt.size() <= 64)) &&
+        (!('displayName' in data) || (data.displayName is string && data.displayName.size() <= 100)) &&
+        (!('lastActiveAt' in data) || (data.lastActiveAt is string && data.lastActiveAt.size() <= 64)) &&
+        (!('activityDates' in data) || (data.activityDates is list && data.activityDates.size() <= 365));
+    }
+
+    function isValidLessonProgress(data) {
+      return data.keys().hasAll(['id', 'userId', 'lessonId', 'courseId', 'completed']) &&
+        (data.keys().size() == 5 || (data.keys().size() == 6 && data.keys().hasAll(['completedAt']))) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.userId is string && data.userId.size() <= 128 &&
+        data.lessonId is string && data.lessonId.size() <= 128 &&
+        data.courseId is string && data.courseId.size() <= 128 &&
+        data.completed is bool &&
+        (!('completedAt' in data) || (data.completedAt is string && data.completedAt.size() <= 64));
+    }
+
+    function isValidCourseCompletion(data) {
+      return data.keys().hasAll(['id', 'userId', 'courseId', 'completed']) &&
+        (data.keys().size() == 4 || (data.keys().size() == 5 && data.keys().hasAll(['completedAt']))) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.userId is string && data.userId.size() <= 128 &&
+        data.courseId is string && data.courseId.size() <= 128 &&
+        data.completed is bool &&
+        (!('completedAt' in data) || (data.completedAt is string && data.completedAt.size() <= 64));
+    }
+
+    function isValidAchievement(data) {
+      return data.keys().hasAll(['id', 'userId', 'achievementId', 'unlocked']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.userId is string && data.userId.size() <= 128 &&
+        data.achievementId is string && data.achievementId.size() <= 128 &&
+        data.unlocked is bool &&
+        (!('unlockedAt' in data) || (data.unlockedAt is string && data.unlockedAt.size() <= 64));
+    }
+
+    match /users/{userId} {
+      allow get: if isOwner(userId) && isValidId(userId);
+      allow list: if false;
+      allow create: if isOwner(userId) && isValidId(userId) &&
+                    incoming().id == userId &&
+                    isValidUserProfile(incoming());
+      allow update: if isOwner(userId) && isValidId(userId) &&
+                    isValidUserProfile(incoming()) &&
+                    incoming().id == existing().id &&
+                    (!('createdAt' in existing()) || !('createdAt' in incoming()) || incoming().createdAt == existing().createdAt);
+      allow delete: if false;
+
+      match /completedLessons/{lessonId} {
+        allow get: if isOwner(userId) && isValidId(userId) && isValidId(lessonId);
+        allow list: if isOwner(userId) && isValidId(userId);
+        allow create: if isOwner(userId) && isValidId(userId) && isValidId(lessonId) &&
+                      incoming().userId == userId &&
+                      incoming().lessonId == lessonId &&
+                      isValidLessonProgress(incoming());
+        allow update: if isOwner(userId) && isValidId(userId) && isValidId(lessonId) &&
+                      incoming().userId == userId &&
+                      incoming().lessonId == lessonId &&
+                      incoming().userId == existing().userId &&
+                      incoming().lessonId == existing().lessonId &&
+                      isValidLessonProgress(incoming());
+        allow delete: if false;
+      }
+
+      match /completedCourses/{courseId} {
+        allow get: if isOwner(userId) && isValidId(userId) && isValidId(courseId);
+        allow list: if isOwner(userId) && isValidId(userId);
+        allow create: if isOwner(userId) && isValidId(userId) && isValidId(courseId) &&
+                      incoming().userId == userId &&
+                      incoming().courseId == courseId &&
+                      isValidCourseCompletion(incoming());
+        allow update: if isOwner(userId) && isValidId(userId) && isValidId(courseId) &&
+                      incoming().userId == userId &&
+                      incoming().courseId == courseId &&
+                      incoming().userId == existing().userId &&
+                      incoming().courseId == existing().courseId &&
+                      isValidCourseCompletion(incoming());
+        allow delete: if false;
+      }
+
+      match /achievements/{achievementId} {
+        allow get: if isOwner(userId) && isValidId(userId) && isValidId(achievementId);
+        allow list: if isOwner(userId) && isValidId(userId);
+        allow create: if isOwner(userId) && isValidId(userId) && isValidId(achievementId) &&
+                      incoming().userId == userId &&
+                      incoming().achievementId == achievementId &&
+                      isValidAchievement(incoming());
+        allow update: if isOwner(userId) && isValidId(userId) && isValidId(achievementId) &&
+                      incoming().userId == userId &&
+                      incoming().achievementId == achievementId &&
+                      incoming().userId == existing().userId &&
+                      incoming().achievementId == existing().achievementId &&
+                      isValidAchievement(incoming());
+        allow delete: if false;
+      }
+    }
+  }
+}

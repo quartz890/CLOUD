@@ -1,0 +1,6 @@
+{
+  "name": "CLOUD",
+  "description": "A modern coding-learning platform to learn HTML, CSS, JavaScript, React, and Python with clarity and confidence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

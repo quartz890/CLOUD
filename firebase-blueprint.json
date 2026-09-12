@@ -1,0 +1,156 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile data",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "User ID matching auth.uid"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "User email address"
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "User custom display name"
+        },
+        "createdAt": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ISO string timestamp of creation"
+        },
+        "lastActiveAt": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ISO string timestamp of last activity"
+        }
+      },
+      "required": ["id", "email"]
+    },
+    "LessonProgress": {
+      "title": "LessonProgress",
+      "description": "Progress and completion record for a lesson",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Progress record ID matching lessonId"
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "User ID matching auth.uid"
+        },
+        "lessonId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Unique lesson ID"
+        },
+        "courseId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Course identifier"
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Whether the lesson is completed"
+        },
+        "completedAt": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ISO string timestamp when completed"
+        }
+      },
+      "required": ["id", "userId", "lessonId", "courseId", "completed"]
+    },
+    "CourseCompletion": {
+      "title": "CourseCompletion",
+      "description": "Completion record for a full course",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Course completion ID matching courseId"
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "User ID matching auth.uid"
+        },
+        "courseId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Unique course ID"
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Whether all lessons in course are completed"
+        },
+        "completedAt": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ISO timestamp when course was fully completed"
+        }
+      },
+      "required": ["id", "userId", "courseId", "completed"]
+    },
+    "AchievementRecord": {
+      "title": "AchievementRecord",
+      "description": "Unlocked achievement record for a user",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Achievement ID matching achievementId"
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "User ID matching auth.uid"
+        },
+        "achievementId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Unique achievement ID"
+        },
+        "unlocked": {
+          "type": "boolean",
+          "description": "Whether achievement is unlocked"
+        },
+        "unlockedAt": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ISO timestamp when achievement was unlocked"
+        }
+      },
+      "required": ["id", "userId", "achievementId", "unlocked"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Private user account profile"
+    },
+    "/users/{userId}/completedLessons/{lessonId}": {
+      "schema": "LessonProgress",
+      "description": "User completed lesson records"
+    },
+    "/users/{userId}/completedCourses/{courseId}": {
+      "schema": "CourseCompletion",
+      "description": "User completed course records"
+    },
+    "/users/{userId}/achievements/{achievementId}": {
+      "schema": "AchievementRecord",
+      "description": "User unlocked achievement records"
+    }
+  }
+}
