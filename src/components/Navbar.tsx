@@ -59,24 +59,24 @@ export const Navbar: React.FC<NavbarProps> = ({
       id="cloud-navbar-header"
       className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all duration-200"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-14 sm:h-20">
           {/* Brand Logo */}
           <button
             id="cloud-logo-button"
             type="button"
             onClick={() => handleNavClick('home')}
-            className="group flex items-center gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded-lg p-1 transition-transform cursor-pointer"
+            className="group flex items-center gap-2 sm:gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 rounded-lg p-1 transition-transform cursor-pointer"
           >
-            <div className="w-10 h-10 rounded-xl bg-sky-500 text-white flex items-center justify-center shadow-sm shadow-sky-500/20 group-hover:bg-sky-600 transition-colors">
-              <Cloud className="w-5 h-5 fill-white/20 text-white stroke-[2.2]" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-sky-500 text-white flex items-center justify-center shadow-xs sm:shadow-sm shadow-sky-500/20 group-hover:bg-sky-600 transition-colors">
+              <Cloud className="w-4 h-4 sm:w-5 sm:h-5 fill-white/20 text-white stroke-[2.2]" />
             </div>
-            <div className="text-left">
-              <span className="text-xl font-extrabold tracking-tight text-slate-900 font-sans group-hover:text-sky-600 transition-colors">
+            <div className="text-left flex items-center gap-1.5 sm:gap-2">
+              <span className="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 font-sans group-hover:text-sky-600 transition-colors">
                 CLOUD
               </span>
-              <span className="hidden sm:inline-block ml-2 px-1.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase bg-slate-100 text-slate-600 rounded">
-                Foundation
+              <span className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold tracking-wider uppercase bg-sky-50 text-sky-700 border border-sky-100/80 rounded-md">
+                Learn
               </span>
             </div>
           </button>
@@ -184,22 +184,26 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Right Quick Controls */}
           <div className="flex md:hidden items-center gap-2">
             {user ? (
               <button
                 type="button"
                 onClick={() => handleNavClick('profile')}
-                className="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center text-xs font-bold"
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-sky-50 border border-sky-200 text-sky-800 text-xs font-semibold cursor-pointer active:scale-95 transition-transform"
+                title="Open profile"
               >
-                {user.email ? user.email.charAt(0).toUpperCase() : <UserIcon className="w-4 h-4" />}
+                <div className="w-5 h-5 rounded-full bg-sky-500 text-white flex items-center justify-center text-[10px] font-bold">
+                  {displayName ? displayName.charAt(0).toUpperCase() : 'U'}
+                </div>
+                <span className="max-w-[80px] truncate text-[11px] font-medium">{displayName || 'Profile'}</span>
               </button>
             ) : (
               <button
                 id="navbar-login-mobile-direct"
                 type="button"
                 onClick={() => onOpenAuth('login')}
-                className="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-100 text-slate-700"
+                className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 text-slate-800 hover:bg-slate-200 transition-colors"
               >
                 Log In
               </button>
@@ -209,11 +213,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               id="mobile-menu-toggle-button"
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500"
+              className="p-2 min-h-[40px] min-w-[40px] flex items-center justify-center rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-500 cursor-pointer"
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>

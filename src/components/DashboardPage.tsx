@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useAuth } from '../lib/AuthContext';
 import { Course, Lesson } from '../types';
 import { CourseIcon } from './CourseIcon';
@@ -100,16 +101,16 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     setNameSaveError(null);
     try {
       await updateUserDisplayName(trimmed);
-      setIsSavingName(false);
       setIsEditingName(false);
       setNameSaveSuccess(true);
       setTimeout(() => {
         setNameSaveSuccess(false);
       }, 3500);
     } catch (err: unknown) {
-      setIsSavingName(false);
       const errMsg = err instanceof Error ? err.message : 'Failed to update display name. Please try again.';
       setNameSaveError(errMsg);
+    } finally {
+      setIsSavingName(false);
     }
   };
 
@@ -286,8 +287,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   };
 
   return (
-    <div id="dashboard-page-root" className="min-h-[85vh] py-8 sm:py-12 bg-slate-50/70">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <div id="dashboard-page-root" className="min-h-[85vh] py-4 sm:py-12 bg-slate-50/70">
+      <Helmet>
+        <title>Dashboard | CLOUD Coding Platform</title>
+        <meta name="description" content="View your progress, track your achievements, and continue learning on CLOUD." />
+      </Helmet>
+      
+      <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 space-y-4 sm:space-y-8">
         {/* Top Breadcrumb Navigation */}
         <nav className="flex items-center justify-between gap-2 text-xs font-medium text-slate-500">
           <div className="flex items-center gap-2">
@@ -349,16 +355,16 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           /* ========================================================================= */
           /* LOGGED IN USER DASHBOARD                                                  */
           /* ========================================================================= */
-          <div className="space-y-8 animate-in fade-in duration-300">
+          <div className="space-y-4 sm:space-y-8 animate-in fade-in duration-300">
             {/* Header / Welcome Banner Card */}
             <div
               id="dashboard-welcome-banner"
-              className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 sm:p-8"
+              className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-8"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                <div className="flex items-start sm:items-center gap-4">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-sky-500 to-sky-600 text-white flex items-center justify-center font-bold text-2xl shadow-md shadow-sky-500/20 shrink-0">
-                    {displayName ? displayName.charAt(0).toUpperCase() : <UserIcon className="w-8 h-8" />}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-6">
+                <div className="flex items-start sm:items-center gap-3 sm:gap-4">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-sky-500 to-sky-600 text-white flex items-center justify-center font-bold text-lg sm:text-2xl shadow-md shadow-sky-500/20 shrink-0">
+                    {displayName ? displayName.charAt(0).toUpperCase() : <UserIcon className="w-6 h-6 sm:w-8 sm:h-8" />}
                   </div>
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
@@ -489,13 +495,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               )}
 
               {/* Learning Progress Summary Counters */}
-              <div className="mt-8 pt-6 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
-                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+              <div className="mt-4 sm:mt-8 pt-4 sm:pt-6 border-t border-slate-100 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                <div className="p-3 sm:p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <span className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider block truncate">
                     Completed Lessons
                   </span>
-                  <div className="flex items-baseline gap-2 mt-1.5">
-                    <span id="dashboard-total-completed-count" className="text-3xl font-extrabold text-slate-900">
+                  <div className="flex items-baseline gap-1.5 sm:gap-2 mt-1 sm:mt-1.5">
+                    <span id="dashboard-total-completed-count" className="text-xl sm:text-3xl font-extrabold text-slate-900">
                       {totalCompletedLessons}
                     </span>
                     <span className="text-xs font-medium text-slate-500">
@@ -504,12 +510,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
-                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                <div className="p-3 sm:p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <span className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider block truncate">
                     Overall Progress
                   </span>
-                  <div className="flex items-baseline gap-2 mt-1.5">
-                    <span id="dashboard-overall-percentage" className="text-3xl font-extrabold text-sky-600">
+                  <div className="flex items-baseline gap-1.5 sm:gap-2 mt-1 sm:mt-1.5">
+                    <span id="dashboard-overall-percentage" className="text-xl sm:text-3xl font-extrabold text-sky-600">
                       {overallPercentage}%
                     </span>
                     <span className="text-xs font-medium text-slate-500">
@@ -524,12 +530,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
-                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                <div className="p-3 sm:p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <span className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider block truncate">
                     Completed Tracks
                   </span>
-                  <div className="flex items-baseline gap-2 mt-1.5">
-                    <span id="dashboard-completed-courses-count" className="text-3xl font-extrabold text-emerald-600">
+                  <div className="flex items-baseline gap-1.5 sm:gap-2 mt-1 sm:mt-1.5">
+                    <span id="dashboard-completed-courses-count" className="text-xl sm:text-3xl font-extrabold text-emerald-600">
                       {totalCompletedCoursesCount}
                     </span>
                     <span className="text-xs font-medium text-slate-500">
@@ -543,13 +549,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   </span>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
-                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center justify-between">
+                <div className="p-3 sm:p-4 rounded-xl bg-slate-50 border border-slate-200/80">
+                  <span className="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center justify-between truncate">
                     <span>Active Streak</span>
-                    <Flame className="w-3.5 h-3.5 text-amber-500" />
+                    <Flame className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-500 shrink-0 ml-1" />
                   </span>
-                  <div className="flex items-baseline gap-2 mt-1.5">
-                    <span id="dashboard-streak-count" className="text-3xl font-extrabold text-amber-500">
+                  <div className="flex items-baseline gap-1.5 sm:gap-2 mt-1 sm:mt-1.5">
+                    <span id="dashboard-streak-count" className="text-xl sm:text-3xl font-extrabold text-amber-500">
                       {currentStreak}
                     </span>
                     <span className="text-xs font-medium text-slate-500">
@@ -566,12 +572,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             {/* "Continue Learning" Prominent Card */}
             <div
               id="dashboard-continue-learning-card"
-              className="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl shadow-md p-6 sm:p-8 relative overflow-hidden"
+              className="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl shadow-md p-5 sm:p-8 relative overflow-hidden"
             >
               {/* Background Accent glow */}
-              <div className="absolute -right-12 -bottom-12 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -right-12 -bottom-12 w-48 h-48 sm:w-64 sm:h-64 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
 
-              <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
                 <div className="space-y-3 max-w-2xl">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30 text-xs font-semibold">
                     <PlayCircle className="w-3.5 h-3.5" />
@@ -625,13 +631,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             {/* BASIC ACHIEVEMENTS SHOWCASE */}
             <div
               id="dashboard-achievements-section"
-              className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 sm:p-8 space-y-6"
+              className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-8 space-y-4 sm:space-y-6"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
                 <div>
                   <div className="flex items-center gap-2">
-                    <Trophy className="w-5 h-5 text-amber-500" />
-                    <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+                    <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
+                    <h2 className="text-base sm:text-xl font-bold text-slate-900">
                       Achievements
                     </h2>
                   </div>
@@ -804,11 +810,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             {/* List of User's Courses with Progress */}
             <div
               id="dashboard-courses-list-section"
-              className="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 sm:p-8 space-y-6"
+              className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-8 space-y-4 sm:space-y-6"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 sm:pb-4 border-b border-slate-100">
                 <div>
-                  <h2 className="text-lg sm:text-xl font-bold text-slate-900">
+                  <h2 className="text-base sm:text-xl font-bold text-slate-900">
                     Your Courses & Curriculum Progress
                   </h2>
                   <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
@@ -828,16 +834,16 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <div
                       key={course.id}
                       id={`dashboard-course-card-${course.slug}`}
-                      className="p-5 rounded-xl border border-slate-200 hover:border-slate-300 hover:shadow-xs transition-all bg-white flex flex-col md:flex-row md:items-center justify-between gap-5"
+                      className="p-3 sm:p-5 rounded-xl border border-slate-200 hover:border-slate-300 hover:shadow-xs transition-all bg-white flex flex-col md:flex-row md:items-center justify-between gap-4"
                     >
                       {/* Left: Icon & Course Info */}
-                      <div className="flex items-start gap-4 min-w-0 flex-1">
-                        <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center shrink-0">
-                          <CourseIcon iconName={course.iconName} className="w-6 h-6" />
+                      <div className="flex items-start gap-3 sm:gap-4 min-w-0 flex-1">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-center shrink-0">
+                          <CourseIcon iconName={course.iconName} className="w-5 h-5 sm:w-6 sm:h-6" />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <div className="flex flex-wrap items-center gap-2 mb-1">
-                            <h3 className="text-base font-bold text-slate-900 truncate">
+                          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1">
+                            <h3 className="text-sm sm:text-base font-bold text-slate-900 truncate">
                               {course.title}
                             </h3>
                             <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600">

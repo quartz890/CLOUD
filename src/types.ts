@@ -15,6 +15,20 @@ export interface QuizQuestion {
   explanation: string;
 }
 
+export interface PracticeSection {
+  title: string;
+  instructions: string[];
+  starterCode?: string;
+  solutionCode?: string;
+  hint?: string;
+}
+
+export interface ProjectConnection {
+  title: string;
+  description: string;
+  howItApplies: string;
+}
+
 export interface LessonDetail {
   id: string;
   courseSlug: string;
@@ -47,6 +61,8 @@ export interface LessonDetail {
     incorrectSnippet?: string;
     correctSnippet?: string;
   }[];
+  practice?: PracticeSection;
+  projectConnection?: ProjectConnection;
   quiz: QuizQuestion[];
 }
 

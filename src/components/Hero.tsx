@@ -79,7 +79,7 @@ print(status)  # Progress: 100.0% complete`,
   const current = previews[activeTab];
 
   return (
-    <section id="hero-section" className="relative pt-12 pb-16 sm:pt-16 sm:pb-24 overflow-hidden">
+    <section id="hero-section" className="relative pt-6 pb-12 sm:pt-16 sm:pb-24 overflow-hidden">
       {/* Background ambient accents - subtle and clean, not dark/heavy */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 right-1/2 translate-x-1/2 w-[700px] h-[350px] bg-sky-100/60 rounded-full blur-3xl" />
@@ -87,17 +87,17 @@ print(status)  # Progress: 100.0% complete`,
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-8 items-center">
           {/* Left Column: Copy and Core CTAs */}
           <div className="lg:col-span-7 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-semibold text-slate-700 shadow-xs mb-6">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-white border border-slate-200 text-[11px] sm:text-xs font-semibold text-slate-700 shadow-2xs mb-4 sm:mb-6">
               <span className="flex h-2 w-2 rounded-full bg-sky-500 animate-pulse" />
-              <span>Foundation Learning Track • HTML, CSS, JS, React & Python</span>
+              <span>Foundation Track • HTML, CSS, JS, React & Python</span>
             </div>
 
             <h1
               id="hero-main-headline"
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.12]"
+              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15] sm:leading-[1.12]"
             >
               Learn to code.{' '}
               <span className="block text-sky-600 font-extrabold mt-1">
@@ -107,7 +107,7 @@ print(status)  # Progress: 100.0% complete`,
 
             <p
               id="hero-supporting-text"
-              className="mt-6 text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal"
+              className="mt-4 sm:mt-6 text-sm sm:text-lg lg:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal"
             >
               Master programming from first principles. No copy-pasting without context. We break down web technologies into intuitive mental models so you write code with genuine clarity and confidence.
             </p>
@@ -115,42 +115,42 @@ print(status)  # Progress: 100.0% complete`,
             {/* Action Buttons */}
             <div
               id="hero-action-buttons"
-              className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
+              className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4"
             >
               <button
                 id="hero-start-learning-button"
                 type="button"
                 onClick={onStartLearning}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-base font-semibold text-white bg-slate-900 hover:bg-slate-800 shadow-sm shadow-slate-900/10 transition-all hover:translate-y-[-1px] active:translate-y-[0px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm sm:text-base font-semibold text-white bg-slate-900 hover:bg-slate-800 shadow-sm shadow-slate-900/10 transition-all hover:translate-y-[-1px] active:translate-y-[0px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 cursor-pointer"
               >
                 <span>Start Learning</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
               <button
                 id="hero-explore-courses-button"
                 type="button"
                 onClick={onExploreCourses}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-base font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 shadow-xs transition-all hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm sm:text-base font-semibold text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 shadow-xs transition-all hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 cursor-pointer"
               >
-                <BookOpen className="w-5 h-5 text-slate-500" />
+                <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-slate-500" />
                 <span>Explore Courses</span>
               </button>
             </div>
 
             {/* Trust & Methodology highlights */}
-            <div className="mt-10 pt-8 border-t border-slate-200/70 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0">
-              <div className="text-left">
-                <div className="text-2xl font-bold text-slate-900">5</div>
-                <div className="text-xs text-slate-500 font-medium">Core Disciplines</div>
+            <div className="mt-8 pt-6 sm:mt-10 sm:pt-8 border-t border-slate-200/70 grid grid-cols-3 gap-2 sm:gap-4 max-w-lg mx-auto lg:mx-0">
+              <div className="text-center sm:text-left p-2 sm:p-0 rounded-lg bg-slate-50 sm:bg-transparent border border-slate-100 sm:border-0">
+                <div className="text-xl sm:text-2xl font-bold text-slate-900">5</div>
+                <div className="text-[10px] sm:text-xs text-slate-500 font-medium">Core Tracks</div>
               </div>
-              <div className="text-left">
-                <div className="text-2xl font-bold text-slate-900">100%</div>
-                <div className="text-xs text-slate-500 font-medium">Concept-First</div>
+              <div className="text-center sm:text-left p-2 sm:p-0 rounded-lg bg-slate-50 sm:bg-transparent border border-slate-100 sm:border-0">
+                <div className="text-xl sm:text-2xl font-bold text-slate-900">100%</div>
+                <div className="text-[10px] sm:text-xs text-slate-500 font-medium">Concept-First</div>
               </div>
-              <div className="text-left">
-                <div className="text-2xl font-bold text-slate-900">Free</div>
-                <div className="text-xs text-slate-500 font-medium">Open Foundation</div>
+              <div className="text-center sm:text-left p-2 sm:p-0 rounded-lg bg-slate-50 sm:bg-transparent border border-slate-100 sm:border-0">
+                <div className="text-xl sm:text-2xl font-bold text-slate-900">Free</div>
+                <div className="text-[10px] sm:text-xs text-slate-500 font-medium">Open Access</div>
               </div>
             </div>
           </div>
@@ -159,32 +159,32 @@ print(status)  # Progress: 100.0% complete`,
           <div className="lg:col-span-5">
             <div
               id="hero-interactive-preview-card"
-              className="bg-white rounded-2xl border border-slate-200 shadow-md shadow-slate-200/50 overflow-hidden transition-all"
+              className="bg-white rounded-2xl border border-slate-200 shadow-sm shadow-slate-200/50 overflow-hidden transition-all"
             >
               {/* Card Header with tabs */}
-              <div className="px-5 py-4 border-b border-slate-100 bg-slate-50/50 flex flex-wrap items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-rose-400" />
-                  <div className="w-3 h-3 rounded-full bg-amber-400" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-400" />
-                  <span className="ml-2 text-xs font-mono text-slate-400 font-medium">mental-model.dev</span>
+              <div className="px-4 py-3 sm:px-5 sm:py-4 border-b border-slate-100 bg-slate-50/50 flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-rose-400" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                  <span className="ml-1.5 text-xs font-mono text-slate-400 font-medium">mental-model.dev</span>
                 </div>
-                <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
+                <span className="text-[10px] sm:text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
                   Interactive Preview
                 </span>
               </div>
 
               {/* Technology Tabs */}
-              <div className="flex border-b border-slate-100 bg-slate-50/30 px-3 pt-2 gap-1 overflow-x-auto no-scrollbar">
+              <div className="flex border-b border-slate-100 bg-slate-50/30 px-2 sm:px-3 pt-2 gap-1 overflow-x-auto no-scrollbar">
                 {(['html', 'css', 'js', 'react', 'python'] as const).map((tab) => (
                   <button
                     key={tab}
                     id={`hero-tab-${tab}`}
                     type="button"
                     onClick={() => setActiveTab(tab)}
-                    className={`px-3 py-2 text-xs font-semibold rounded-t-lg transition-colors whitespace-nowrap ${
+                    className={`px-3 py-1.5 sm:py-2 text-xs font-semibold rounded-t-lg transition-colors whitespace-nowrap cursor-pointer ${
                       activeTab === tab
-                        ? 'bg-white text-slate-900 border-t-2 border-sky-500 border-x border-slate-200 shadow-xs -mb-[1px]'
+                        ? 'bg-white text-slate-900 border-t-2 border-sky-500 border-x border-slate-200 shadow-2xs -mb-[1px]'
                         : 'text-slate-500 hover:text-slate-800'
                     }`}
                   >
@@ -194,21 +194,21 @@ print(status)  # Progress: 100.0% complete`,
               </div>
 
               {/* Code Snippet */}
-              <div className="p-5 bg-slate-900 text-slate-200 font-mono text-xs leading-relaxed overflow-x-auto">
-                <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-800 text-[11px] text-slate-400">
-                  <span>{current.tagline}</span>
-                  <span className="text-slate-400 font-mono">syntax: {activeTab}</span>
+              <div className="p-3.5 sm:p-5 bg-slate-900 text-slate-200 font-mono text-xs leading-relaxed overflow-x-auto">
+                <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-800 text-[10px] sm:text-[11px] text-slate-400">
+                  <span className="truncate mr-2">{current.tagline}</span>
+                  <span className="text-slate-400 font-mono shrink-0">syntax: {activeTab}</span>
                 </div>
-                <pre className="text-slate-100 font-normal">
+                <pre className="text-slate-100 font-normal text-[11px] sm:text-xs">
                   <code>{current.code}</code>
                 </pre>
               </div>
 
               {/* Mental Model Explanation Footer */}
-              <div className="p-5 bg-white space-y-3">
-                <div className="flex items-start gap-3">
-                  <div className="mt-0.5 p-1 rounded-md bg-sky-50 text-sky-600">
-                    <CheckCircle2 className="w-4 h-4" />
+              <div className="p-4 sm:p-5 bg-white space-y-3">
+                <div className="flex items-start gap-2.5 sm:gap-3">
+                  <div className="mt-0.5 p-1 rounded-md bg-sky-50 text-sky-600 shrink-0">
+                    <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
@@ -220,17 +220,17 @@ print(status)  # Progress: 100.0% complete`,
                   </div>
                 </div>
 
-                <div className="pt-2 flex items-center justify-between">
-                  <span className="text-xs font-medium text-slate-500">
+                <div className="pt-2 flex items-center justify-between border-t border-slate-100">
+                  <span className="text-[11px] sm:text-xs font-medium text-slate-500">
                     Part of CLOUD Foundation
                   </span>
                   <button
                     id={`hero-preview-explore-${activeTab}`}
                     type="button"
                     onClick={onExploreCourses}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 hover:text-sky-700 hover:underline"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-sky-600 hover:text-sky-700 hover:underline cursor-pointer"
                   >
-                    <span>View {current.label} Track</span>
+                    <span>View Track</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>

@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { Home as HomeIcon, BookOpen, LayoutDashboard, User as UserIcon, Layers } from 'lucide-react';
 import { COURSES } from './data/courses';
 import { Course, Lesson } from './types';
 import { Navbar } from './components/Navbar';
@@ -310,6 +312,16 @@ function AppContent() {
 
   return (
     <div id="cloud-app-root" className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-sky-100 selection:text-sky-900">
+      {currentView === 'home' && (
+        <Helmet>
+          <title>CLOUD Coding Platform - Master Web Development</title>
+          <meta name="description" content="Master web development with CLOUD. We offer courses in HTML, CSS, JavaScript, React, and Python. Join today and start building." />
+          <meta property="og:title" content="CLOUD Coding Platform - Master Web Development" />
+          <meta property="og:description" content="Master web development with CLOUD. We offer courses in HTML, CSS, JavaScript, React, and Python." />
+          <link rel="canonical" href="https://ais-dev-wxpc3j32im2tzkdtnkbetd-449991474091.europe-west2.run.app/" />
+        </Helmet>
+      )}
+
       {/* Navigation */}
       <Navbar
         onStartLearning={handleStartLearning}
@@ -323,7 +335,7 @@ function AppContent() {
       />
 
       {/* Main Content Area */}
-      <main id="cloud-main-content" className="flex-1">
+      <main id="cloud-main-content" className="flex-1 pb-16 md:pb-0">
         {currentView === 'home' && (
           <>
             {/* Hero Section */}
@@ -420,6 +432,89 @@ function AppContent() {
         }}
         onSelectCourseBySlug={handleSelectCourseBySlug}
       />
+
+      {/* Mobile Fixed Bottom Navigation Bar for one-handed reachability */}
+      <nav
+        id="mobile-bottom-navigation-bar"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-[0_-4px_16px_rgba(0,0,0,0.04)] pb-safe transition-all"
+        aria-label="Mobile Navigation"
+      >
+        <div className="grid grid-cols-4 h-14 max-w-md mx-auto items-center px-1">
+          {/* Home Tab */}
+          <button
+            id="mobile-bottom-tab-home"
+            type="button"
+            onClick={handleNavigateHome}
+            className={`flex flex-col items-center justify-center h-full w-full py-1 text-center transition-colors cursor-pointer ${
+              currentView === 'home'
+                ? 'text-sky-600 font-bold'
+                : 'text-slate-500 hover:text-slate-900 font-medium'
+            }`}
+          >
+            <HomeIcon className={`w-4 h-4 ${currentView === 'home' ? 'stroke-[2.5]' : 'stroke-[1.8]'}`} />
+            <span className="text-[10px] mt-1 tracking-tight">Home</span>
+          </button>
+
+          {/* Learn Tab */}
+          <button
+            id="mobile-bottom-tab-learn"
+            type="button"
+            onClick={handleOpenLearn}
+            className={`flex flex-col items-center justify-center h-full w-full py-1 text-center transition-colors cursor-pointer ${
+              currentView === 'learn' || currentView === 'course-overview'
+                ? 'text-sky-600 font-bold'
+                : 'text-slate-500 hover:text-slate-900 font-medium'
+            }`}
+          >
+            <BookOpen className={`w-4 h-4 ${currentView === 'learn' || currentView === 'course-overview' ? 'stroke-[2.5]' : 'stroke-[1.8]'}`} />
+            <span className="text-[10px] mt-1 tracking-tight">Courses</span>
+          </button>
+
+          {/* Current Lesson / Quick Learning Context (or active course) */}
+          <button
+            id="mobile-bottom-tab-lesson"
+            type="button"
+            onClick={() => {
+              if (selectedCourse && selectedLesson) {
+                setCurrentView('lesson');
+                setActiveNav('learn');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              } else if (selectedCourse) {
+                setCurrentView('course-overview');
+                setActiveNav('learn');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              } else {
+                handleOpenLearn();
+              }
+            }}
+            className={`flex flex-col items-center justify-center h-full w-full py-1 text-center transition-colors cursor-pointer ${
+              currentView === 'lesson'
+                ? 'text-sky-600 font-bold'
+                : 'text-slate-500 hover:text-slate-900 font-medium'
+            }`}
+          >
+            <Layers className={`w-4 h-4 ${currentView === 'lesson' ? 'stroke-[2.5]' : 'stroke-[1.8]'}`} />
+            <span className="text-[10px] mt-1 tracking-tight">
+              {currentView === 'lesson' ? 'Lesson' : 'Syllabus'}
+            </span>
+          </button>
+
+          {/* Dashboard / Profile Tab */}
+          <button
+            id="mobile-bottom-tab-profile"
+            type="button"
+            onClick={handleOpenProfile}
+            className={`flex flex-col items-center justify-center h-full w-full py-1 text-center transition-colors cursor-pointer ${
+              currentView === 'profile'
+                ? 'text-sky-600 font-bold'
+                : 'text-slate-500 hover:text-slate-900 font-medium'
+            }`}
+          >
+            <LayoutDashboard className={`w-4 h-4 ${currentView === 'profile' ? 'stroke-[2.5]' : 'stroke-[1.8]'}`} />
+            <span className="text-[10px] mt-1 tracking-tight">Dashboard</span>
+          </button>
+        </div>
+      </nav>
 
       {/* Interactive Course Detail Modal for Home view */}
       <CourseModal

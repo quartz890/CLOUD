@@ -193,14 +193,20 @@ export async function recordDailyActivity(userId: string): Promise<string[]> {
     const userRef = doc(db, 'users', userId);
     const snap = await getDoc(userRef);
     let remoteDates: string[] = [];
+    let hasRemoteData = false;
+    
     if (snap.exists()) {
       const data = snap.data();
       if (Array.isArray(data.activityDates)) {
         remoteDates = data.activityDates;
+        hasRemoteData = true;
       }
     }
 
-    const combinedDates = Array.from(new Set([...remoteDates, ...localDates, todayStr])).slice(-365);
+    // If we have remote data, trust it over local data to prevent stale sync issues across devices
+    const baseDates = hasRemoteData ? remoteDates : Array.from(new Set([...remoteDates, ...localDates]));
+    const combinedDates = Array.from(new Set([...baseDates, todayStr])).sort().slice(-365);
+    
     setLocalActivityDates(userId, combinedDates);
 
     await setDoc(
@@ -277,7 +283,7 @@ export function subscribeToCompletedLessons(
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
-        const map: Record<string, boolean> = { ...getLocalCompletedLessons(userId) };
+        const map: Record<string, boolean> = {};
         snapshot.forEach((docSnap) => {
           const data = docSnap.data();
           if (data.completed) {
@@ -349,7 +355,7 @@ export function subscribeToCompletedCourses(
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
-        const map: Record<string, boolean> = { ...getLocalCompletedCourses(userId) };
+        const map: Record<string, boolean> = {};
         snapshot.forEach((docSnap) => {
           const data = docSnap.data();
           if (data.completed) {
@@ -433,9 +439,7 @@ export function subscribeToAchievements(
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
-        const map: Record<string, { unlocked: boolean; unlockedAt: string }> = {
-          ...getLocalAchievements(userId),
-        };
+        const map: Record<string, { unlocked: boolean; unlockedAt: string }> = {};
         snapshot.forEach((docSnap) => {
           const data = docSnap.data();
           if (data.unlocked) {
