@@ -1,523 +1,572 @@
-import { LessonDetail } from '../../types';
+import { LessonDetail } from '../types';
 
 export const CSS_LESSONS: Record<string, LessonDetail> = {
-  'css-l1': {
-    id: 'css-l1',
-    courseSlug: 'css',
-    title: 'The Cascade, Specificity & Inheritance',
-    duration: '15 min',
-    introduction:
-      'CSS stands for Cascading Style Sheets. To write predictable, maintainable CSS without wrestling with !important, you must master the core algorithm behind how browsers calculate which style rule wins: the Cascade, Specificity weighting, and property Inheritance.',
-    learningObjectives: [
-      'Understand the three pillars of CSS rule resolution: Source Order, Specificity, and Importance',
-      'Learn how to calculate CSS specificity using the (Inline, ID, Class, Element) scoring system',
-      'Discover which CSS properties inherit by default (like typography) vs those that do not (like borders and margins)',
-      'Avoid specificity wars and understand why overriding styles with !important leads to technical debt',
+  "css-l1": {
+    "id": "css-l1",
+    "courseSlug": "css",
+    "title": "Selectors, Properties, and Colors",
+    "duration": "1h",
+    "introduction": "Welcome to CSS! If HTML is the skeleton of a webpage, CSS (Cascading Style Sheets) is the skin and clothing. In this lesson, we will learn how to target HTML elements and change their appearance, starting with colors.",
+    "learningObjectives": [
+      "Understand the anatomy of a CSS rule.",
+      "Learn how to link a CSS file to an HTML document.",
+      "Use Element, Class, and ID selectors.",
+      "Apply text and background colors."
     ],
-    explanation: [
+    "explanation": [
       {
-        heading: 'The Three Factors of The Cascade',
-        paragraphs: [
-          'When multiple conflicting CSS rules target the same HTML element, the browser resolves the conflict using three primary criteria evaluated in this exact order:',
-          '1. Importance & Origin: Rules with !important win, followed by developer styles, then user agent (browser default) styles.',
-          '2. Specificity: More specific selectors override generic selectors, regardless of where they appear in the stylesheet.',
-          '3. Source Order: When importance and specificity are equal, the rule declared latest in the stylesheet wins.',
-        ],
+        "heading": "WHAT is CSS?",
+        "paragraphs": [
+          "CSS stands for Cascading Style Sheets. It describes how HTML elements should be displayed on screen, paper, or in other media."
+        ]
       },
       {
-        heading: 'Calculating Specificity Score',
-        paragraphs: [
-          'Specificity is calculated as a 4-part vector (Inline, ID, Class/Attribute/Pseudo-class, Element/Pseudo-element):',
-          '• Inline styles (style="..."): (1, 0, 0, 0) — highest standard specificity.',
-          '• ID selectors (#header): (0, 1, 0, 0) — 100x stronger than classes.',
-          '• Class selectors (.card), attribute selectors ([type="text"]), pseudo-classes (:hover): (0, 0, 1, 0).',
-          '• Element selectors (p, div, h1) and pseudo-elements (::before): (0, 0, 0, 1).',
-        ],
-        keyPoints: [
-          'Universal selector (*) and combinators (+, >, ~) contribute (0, 0, 0, 0) specificity.',
-          'A single class (.btn) beats 10 stacked element selectors (div p span em ...).',
-          'An ID (#main) beats 1000 stacked class selectors.',
-        ],
+        "heading": "WHY use CSS?",
+        "paragraphs": [
+          "HTML was NEVER intended to contain tags for formatting a document. CSS separates the content (HTML) from the presentation (styling), making maintenance much easier."
+        ]
       },
       {
-        heading: 'Property Inheritance',
-        paragraphs: [
-          'Some CSS properties automatically pass their computed values down from parent elements to child elements. Typography properties (color, font-family, font-size, line-height, text-align) inherit naturally.',
-          'Box-model properties (margin, padding, border, width, height, background) DO NOT inherit by default, because you would never want a parent padding to duplicate inside every nested paragraph.',
-        ],
+        "heading": "HOW does a CSS rule work?",
+        "paragraphs": [
+          "A CSS rule consists of a selector and a declaration block. The selector points to the HTML element you want to style. The declaration block contains one or more declarations separated by semicolons (e.g., `color: red;`)."
+        ]
       },
+      {
+        "heading": "WHEN to use Classes vs IDs?",
+        "paragraphs": [
+          "Use an Element selector (e.g., `p`) to target ALL elements of that type. Use a Class (e.g., `.highlight`) to target MULTIPLE specific elements. Use an ID (e.g., `#header`) to target a SINGLE unique element."
+        ]
+      }
     ],
-    codeExample: {
-      language: 'css',
-      filename: 'specificity-demo.css',
-      code: `/* Specificity: (0, 0, 0, 1) - Element */
-p {
-  color: #334155;
-  font-size: 16px;
-}
-
-/* Specificity: (0, 0, 1, 0) - Class */
-.lead-text {
-  color: #0284c7; /* This wins over element selector */
-}
-
-/* Specificity: (0, 1, 0, 0) - ID */
-#hero-intro {
-  color: #7c3aed; /* This wins over both element and class */
-}
-
-/* Specificity: (0, 0, 2, 0) - Two Classes */
-.card .lead-text {
-  color: #059669; /* Wins over single .lead-text because 2 classes > 1 class */
-}`,
-      explanation:
-        'Notice how the browser compares specificity categories from left to right. An ID selector always triumphs over any number of class selectors.',
+    "codeExample": {
+      "language": "css",
+      "filename": "styles.css",
+      "explanation": "Examples of element, class, and ID selectors.",
+      "code": "/* Element Selector: Targets all <h1> tags */\nh1 {\n  color: blue;\n}\n\n/* Class Selector: Targets elements with class=\"error\" */\n.error {\n  color: red;\n  background-color: yellow;\n}\n\n/* ID Selector: Targets the one element with id=\"main-nav\" */\n#main-nav {\n  background-color: black;\n}"
     },
-    practicalExample: {
-      title: 'Debugging an Overridden Button Style',
-      scenario: 'You created a special red alert button class, but it is not applying because of an ID selector in the legacy stylesheet.',
-      code: `/* Legacy CSS with high specificity */
-#navigation button {
-  background-color: #2563eb;
-  color: #ffffff;
-}
-
-/* Your new utility class (Loses because (0,0,1,0) < (0,1,0,1)) */
-.btn-danger {
-  background-color: #dc2626;
-}
-
-/* Professional Refactor: Keep specificity low with BEM or utility classes */
-.nav-btn {
-  background-color: #2563eb;
-}
-.nav-btn-danger {
-  background-color: #dc2626; /* Successfully applies! */
-}`,
-      explanation:
-        'By avoiding ID selectors in CSS rules, all components remain easily customizable with single class utilities.',
-      outputDescription: 'Shows how lowering selector specificity avoids styling deadlocks.',
+    "practicalExample": {
+      "title": "Styling a Warning Message",
+      "scenario": "You want to style a specific paragraph to look like a warning alert.",
+      "explanation": "By creating a `.warning` class, you can apply these styles to any paragraph you want just by adding `class=\"warning\"` in the HTML.",
+      "code": ".warning {\n  color: darkorange;\n  background-color: #fff3cd;\n  border: 1px solid orange;\n}"
     },
-    commonMistakes: [
+    "commonMistakes": [
       {
-        mistake: 'Using !important to brute-force a CSS override',
-        whyItHappens: 'A style rule is not applying due to higher specificity elsewhere, so the developer adds !important.',
-        howToFix: 'Identify the conflicting high-specificity selector and refactor it to a simple class instead.',
-        incorrectSnippet: `.btn-primary {
-  background-color: #2563eb !important;
-}`,
-        correctSnippet: `.btn-primary {
-  background-color: #2563eb;
-}`,
-      },
+        "mistake": "Forgetting the dot (.) or hash (#).",
+        "whyItHappens": "In HTML you write `class=\"box\"`, so beginners write `box { ... }` in CSS.",
+        "howToFix": "In CSS, you MUST prepend a dot for classes (`.box`) and a hash for IDs (`#box`).",
+        "incorrectSnippet": "box {\n  color: red;\n}",
+        "correctSnippet": ".box {\n  color: red;\n}"
+      }
     ],
-    practice: {
-      title: 'Calculate Specificity & Predict Winning Rule',
-      instructions: [
-        'Analyze the provided selectors and determine which color will be rendered on the paragraph.',
-        'Refactor the CSS so that the accent class `.highlight` can reliably override default styles without using IDs.',
+    "practice": {
+      "title": "Style a Button",
+      "instructions": [
+        "Target the class `.btn`.",
+        "Set the text color to white.",
+        "Set the background color to green."
       ],
-      starterCode: `div#container p.text {
-  color: blue;
-}
-
-p.highlight {
-  color: orange; /* Currently loses because ID wins */
-}`,
-      hint: 'Remove the #container ID and structure your classes with equal or targeted class specificity.',
-      solutionCode: `.content-box .text {
-  color: #1e293b;
-}
-
-.content-box .text.highlight {
-  color: #f97316; /* Wins cleanly with (0,0,2,0) */
-}`,
+      "starterCode": ".btn {\n  /* Your code here */\n}",
+      "hint": "Use the `color` and `background-color` properties.",
+      "solutionCode": ".btn {\n  color: white;\n  background-color: green;\n}"
     },
-    projectConnection: {
-      title: 'Scalable CSS Architectures (BEM & Tailwind)',
-      description:
-        'Modern design systems and frameworks (like Tailwind CSS and BEM methodology) intentionally keep all CSS selectors at a flat single-class specificity (0, 0, 1, 0) to eliminate specificity conflicts entirely.',
-      howItApplies:
-        'In large enterprise teams with 50+ developers, flat specificity prevents new features from accidentally breaking existing component layouts.',
+    "projectConnection": {
+      "title": "Portfolio Project",
+      "description": "Setting your brand colors.",
+      "howItApplies": "You will use these concepts to define the primary and secondary colors of your entire portfolio."
     },
-    quiz: [
+    "quiz": [
       {
-        id: 'css-l1-q1',
-        question: 'Which of the following selectors has the HIGHEST specificity?',
-        options: [
-          'div.container ul li.active a',
-          '#header-nav',
-          '.navigation-bar .menu-item.active',
-          'body main section article p',
+        "id": "css-l1-q1",
+        "question": "Which selector targets an element with id=\"hero\"?",
+        "options": [
+          ".hero",
+          "#hero",
+          "hero",
+          "*hero"
         ],
-        correctOptionIndex: 1,
-        explanation:
-          '#header-nav has an ID selector, giving it a specificity of (0, 1, 0, 0), which beats any combination of classes and element tags.',
+        "correctOptionIndex": 1,
+        "explanation": "The hash symbol (#) is used to target IDs."
       },
       {
-        id: 'css-l1-q2',
-        question: 'Which of the following properties is inherited by child elements by default?',
-        options: ['margin', 'padding', 'font-family', 'border'],
-        correctOptionIndex: 2,
-        explanation:
-          'Typography properties like font-family, color, and line-height inherit from parents, whereas box-model properties do not.',
-      },
-      {
-        id: 'css-l1-q3',
-        question: 'When two conflicting CSS rules have the exact same specificity and importance, which one applies?',
-        options: [
-          'The rule declared latest in the stylesheet (Source Order)',
-          'The rule declared first in the stylesheet',
-          'The rule with the shortest class name',
-          'The browser randomly selects one',
+        "id": "css-l1-q2",
+        "question": "What does CSS stand for?",
+        "options": [
+          "Creative Style Sheets",
+          "Computer Style Sheets",
+          "Cascading Style Sheets",
+          "Colorful Style Sheets"
         ],
-        correctOptionIndex: 0,
-        explanation:
-          'When specificity and importance are equal, the cascade resolves the conflict by taking the rule that appears latest in source order.',
+        "correctOptionIndex": 2,
+        "explanation": "CSS stands for Cascading Style Sheets."
       },
-    ],
+      {
+        "id": "css-l1-q3",
+        "question": "Which property changes the color of text?",
+        "options": [
+          "text-color",
+          "font-color",
+          "color",
+          "background-color"
+        ],
+        "correctOptionIndex": 2,
+        "explanation": "The `color` property dictates the text color."
+      }
+    ]
   },
-
-  'css-l2': {
-    id: 'css-l2',
-    courseSlug: 'css',
-    title: 'CSS Selectors Mastery & Pseudo-classes',
-    duration: '16 min',
-    introduction:
-      'Writing surgical, performant CSS requires mastering modern selector combinators, pseudo-classes (:hover, :focus-visible, :nth-child), and relational selectors (:has, :is, :where). In this lesson, you will learn how to style UI states cleanly without writing messy JavaScript event handlers.',
-    learningObjectives: [
-      'Master combinators: Descendant (space), Child (>), Adjacent sibling (+), and General sibling (~)',
-      'Style interactive UI states with :hover, :focus-visible, and :disabled',
-      'Select elements by structural position using :nth-child(2n), :first-of-type, and :last-child',
-      'Leverage modern pseudo-classes: :is(), :where(), and the parent selector :has()',
+  "css-l2": {
+    "id": "css-l2",
+    "courseSlug": "css",
+    "title": "Typography and The Box Model",
+    "duration": "1h",
+    "introduction": "Every single element on a webpage is a rectangular box. Understanding this \"Box Model\" is the single most important concept in CSS. In this lesson, we will master the box model and learn how to format typography.",
+    "learningObjectives": [
+      "Understand Margin, Border, Padding, and Content.",
+      "Control text size, weight, and alignment.",
+      "Change fonts using font-family.",
+      "Calculate the true size of an element."
     ],
-    explanation: [
+    "explanation": [
       {
-        heading: 'Combinators in CSS',
-        paragraphs: [
-          'Combinators define the relationship between two selectors:',
-          '• Descendant (A B): Targets any B inside A, regardless of nesting depth.',
-          '• Direct Child (A > B): Targets only B elements that are direct children of A.',
-          '• Adjacent Sibling (A + B): Targets B if it immediately follows A at the same level.',
-          '• General Sibling (A ~ B): Targets any B that follows A anywhere within the same parent.',
-        ],
+        "heading": "WHAT is the Box Model?",
+        "paragraphs": [
+          "The CSS box model is a box that wraps around every HTML element. It consists of: Margins, Borders, Padding, and the actual Content."
+        ]
       },
       {
-        heading: 'Interactive & Accessibility Pseudo-classes',
-        paragraphs: [
-          ':hover triggers on mouse cursor hover. For keyboard users, :focus-visible displays an outline only when navigating with the keyboard (Tab key) rather than clicking with a mouse.',
-          'Using :focus-visible instead of removing outlines with outline: none ensures your web app remains 100% accessible to disabled users.',
-        ],
+        "heading": "WHY is it important?",
+        "paragraphs": [
+          "Without understanding the box model, you cannot accurately control the layout, size, and spacing of elements. Elements will overlap or push each other in unpredictable ways."
+        ]
       },
+      {
+        "heading": "HOW do Margin and Padding differ?",
+        "paragraphs": [
+          "Padding is the space INSIDE the border, between the content and the border. Margin is the space OUTSIDE the border, pushing other elements away."
+        ]
+      },
+      {
+        "heading": "WHEN to use font properties?",
+        "paragraphs": [
+          "Use `font-size` for size, `font-weight` for boldness (e.g., bold, 400, 700), `text-align` to center text, and `font-family` to change the typeface (e.g., Arial, Helvetica)."
+        ]
+      }
     ],
-    codeExample: {
-      language: 'css',
-      filename: 'selectors-showcase.css',
-      code: `/* Direct child only */
-.menu > li {
-  list-style: none;
-}
-
-/* Zebra-striping table rows */
-tbody tr:nth-child(even) {
-  background-color: #f8fafc;
-}
-
-/* Accessible focus ring for keyboard navigation */
-button:focus-visible {
-  outline: 2px solid #2563eb;
-  outline-offset: 2px;
-}
-
-/* The parent selector: Style card if it contains an image */
-.card:has(img) {
-  padding-top: 0;
-}
-
-/* Zero-specificity group styling with :where */
-:where(h1, h2, h3) {
-  margin-bottom: 0.5rem;
-}`,
-      explanation:
-        'Notice how :focus-visible provides a clean focus ring for keyboard navigation without showing ugly outlines on mouse clicks.',
+    "codeExample": {
+      "language": "css",
+      "filename": "box.css",
+      "explanation": "A visual demonstration of padding vs margin.",
+      "code": ".box {\n  /* Content size */\n  width: 200px;\n  height: 100px;\n  \n  /* Space INSIDE the box */\n  padding: 20px;\n  \n  /* The edge of the box */\n  border: 2px solid black;\n  \n  /* Space OUTSIDE the box */\n  margin: 30px;\n}"
     },
-    practicalExample: {
-      title: 'Styling Form Field Validation States Purely in CSS',
-      scenario: 'Displaying green borders on valid email inputs and showing an error message on invalid ones without JS.',
-      code: `/* Input validity state */
-input:required:valid {
-  border-color: #10b981;
-}
-
-input:required:invalid:not(:placeholder-shown) {
-  border-color: #ef4444;
-}
-
-/* Show error hint when input is invalid */
-input:invalid:not(:placeholder-shown) + .error-msg {
-  display: block;
-  color: #dc2626;
-}`,
-      explanation:
-        'Using adjacent sibling selector (+) and pseudo-classes (:invalid, :not), you create instant validation feedback.',
-      outputDescription: 'Inputs highlight red on invalid formatting and display an inline error message automatically.',
+    "practicalExample": {
+      "title": "Styling a Quote Card",
+      "scenario": "You want to style a blockquote to look like a clean, modern card.",
+      "explanation": "We add padding so the text does not touch the edges, a border for definition, and margin to separate it from surrounding text.",
+      "code": ".quote-card {\n  font-family: Georgia, serif;\n  font-size: 18px;\n  font-style: italic;\n  padding: 24px;\n  border-left: 4px solid blue;\n  background-color: #f9f9f9;\n  margin-bottom: 20px;\n}"
     },
-    commonMistakes: [
+    "commonMistakes": [
       {
-        mistake: 'Using * { outline: none } to remove browser focus rings',
-        whyItHappens: 'Developers dislike default blue browser focus rings on button clicks.',
-        howToFix: 'Never remove outlines without providing a custom :focus-visible style. Otherwise keyboard navigation is impossible.',
-        incorrectSnippet: `button:focus {
-  outline: none;
-}`,
-        correctSnippet: `button:focus-visible {
-  outline: 2px solid #2563eb;
-  outline-offset: 2px;
-}`,
-      },
+        "mistake": "Confusing padding and margin.",
+        "whyItHappens": "If an element has no background color or border, increasing padding or margin looks identical visually.",
+        "howToFix": "Temporarily add a `border: 1px solid red;` to your element to clearly see where the inside (padding) ends and the outside (margin) begins.",
+        "incorrectSnippet": "/* Trying to push text away from the border using margin */\n.btn { margin: 10px; border: 1px solid black; }",
+        "correctSnippet": "/* Correct: using padding to push text away from the border */\n.btn { padding: 10px; border: 1px solid black; }"
+      }
     ],
-    practice: {
-      title: 'Build a Zebra-Striped Data List',
-      instructions: [
-        'Write CSS selectors to style a list of user transactions.',
-        'Give even list items a light grey background using :nth-child.',
-        'Target only the first list item to have rounded top corners using :first-child.',
-        'Add a smooth hover effect on list items using :hover.',
+    "practice": {
+      "title": "Create a Spaced Container",
+      "instructions": [
+        "Target the class `.container`.",
+        "Add 20px of padding on all sides.",
+        "Add 40px of margin on all sides."
       ],
-      starterCode: `ul.transactions li {
-  padding: 12px;
-  /* Add your rules below */
-}`,
-      hint: 'Use :nth-child(even), :first-child, and :hover pseudo-classes.',
-      solutionCode: `ul.transactions li {
-  padding: 12px 16px;
-  border-bottom: 1px solid #e2e8f0;
-  transition: background-color 0.15s ease;
-}
-
-ul.transactions li:nth-child(even) {
-  background-color: #f8fafc;
-}
-
-ul.transactions li:first-child {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-ul.transactions li:hover {
-  background-color: #f1f5f9;
-}`,
+      "starterCode": ".container {\n  border: 1px solid gray;\n}",
+      "hint": "Use the shorthand `padding` and `margin` properties.",
+      "solutionCode": ".container {\n  border: 1px solid gray;\n  padding: 20px;\n  margin: 40px;\n}"
     },
-    projectConnection: {
-      title: 'Interactive Design Systems & Micro-Interactions',
-      description:
-        'Clean UI components in Stripe, Linear, and Apple rely on subtle pseudo-class states (:hover, :active, :focus-visible) to provide tactile visual feedback.',
-      howItApplies:
-        'Using CSS pseudo-classes instead of JavaScript mouse event handlers saves hundreds of CPU cycles during high-frequency scrolling and rendering.',
+    "projectConnection": {
+      "title": "Portfolio Project",
+      "description": "Spacing out your content.",
+      "howItApplies": "You will use the box model heavily to ensure your portfolio sections have breathing room and do not look cluttered."
     },
-    quiz: [
+    "quiz": [
       {
-        id: 'css-l2-q1',
-        question: 'What is the difference between the descendant selector (div p) and child selector (div > p)?',
-        options: [
-          'div p targets any paragraph inside div regardless of depth; div > p targets only direct children.',
-          'div > p targets siblings, while div p targets parents.',
-          'There is no functional difference.',
-          'div > p is only supported in Internet Explorer.',
+        "id": "css-l2-q1",
+        "question": "Which property creates space OUTSIDE the border of an element?",
+        "options": [
+          "padding",
+          "spacing",
+          "margin",
+          "gap"
         ],
-        correctOptionIndex: 0,
-        explanation:
-          'The child combinator (>) strictly matches elements that are direct immediate children of the parent.',
+        "correctOptionIndex": 2,
+        "explanation": "Margin creates space outside the border."
       },
       {
-        id: 'css-l2-q2',
-        question: 'Why is :focus-visible preferred over :focus in modern web development?',
-        options: [
-          ':focus-visible only applies the focus ring when navigating via keyboard (or assistive tech), avoiding visual noise on mouse clicks.',
-          ':focus-visible executes in a Web Worker.',
-          ':focus is deprecated in CSS3.',
-          ':focus-visible changes the cursor icon automatically.',
+        "id": "css-l2-q2",
+        "question": "If a box has width:100px, padding:10px, and border:5px (left and right), what is its total visual width?",
+        "options": [
+          "100px",
+          "110px",
+          "115px",
+          "130px"
         ],
-        correctOptionIndex: 0,
-        explanation:
-          ':focus-visible provides accessibility focus rings for keyboard users while keeping click interactions visually clean.',
+        "correctOptionIndex": 3,
+        "explanation": "Total width = 100(width) + 10(pad-left) + 10(pad-right) + 5(border-left) + 5(border-right) = 130px."
       },
       {
-        id: 'css-l2-q3',
-        question: 'What does the modern selector .card:has(img) accomplish?',
-        options: [
-          'It styles the image inside the card.',
-          'It styles the .card element ONLY IF it contains an <img> tag.',
-          'It deletes the image from the DOM.',
-          'It prevents images from loading.',
+        "id": "css-l2-q3",
+        "question": "Which property changes the typeface (e.g., to Arial)?",
+        "options": [
+          "text-style",
+          "font-family",
+          "font-type",
+          "typeface"
         ],
-        correctOptionIndex: 1,
-        explanation:
-          ':has() is the relational parent selector in CSS, allowing you to style an element based on its descendant children.',
-      },
-    ],
+        "correctOptionIndex": 1,
+        "explanation": "`font-family` specifies the font for an element."
+      }
+    ]
   },
-
-  'css-l3': {
-    id: 'css-l3',
-    courseSlug: 'css',
-    title: 'The Box Model & Box-Sizing Reset',
-    duration: '16 min',
-    introduction:
-      'Everything in CSS is a rectangular box. In this lesson, you will master the four layers of the Box Model (Content, Padding, Border, and Margin), margin collapsing rules, and why box-sizing: border-box is the single most critical CSS reset rule for predictable layouts.',
-    learningObjectives: [
-      'Understand the 4 concentric layers of the CSS Box Model',
-      'Learn the difference between content-box (default) and border-box sizing',
-      'Apply the universal box-sizing reset (*, *::before, *::after)',
-      'Understand margin collapse behavior between adjacent vertical elements',
+  "css-l3": {
+    "id": "css-l3",
+    "courseSlug": "css",
+    "title": "Positioning and Display",
+    "duration": "1h",
+    "introduction": "Now that we can style individual boxes, we need to understand how they stack and flow together on the page. The `display` and `position` properties are the keys to page layout.",
+    "learningObjectives": [
+      "Understand block vs. inline elements.",
+      "Hide elements using display: none.",
+      "Master position: static, relative, absolute, and fixed.",
+      "Use z-index to control stacking order."
     ],
-    explanation: [
+    "explanation": [
       {
-        heading: 'The Four Box Model Layers',
-        paragraphs: [
-          'Every HTML element is rendered as a box containing four layers:',
-          '1. Content Box: Where text and images reside.',
-          '2. Padding: Transparent interior breathing room between the content and the border.',
-          '3. Border: The line wrapping around the padding and content.',
-          '4. Margin: Transparent exterior spacing pushing neighboring elements away.',
-        ],
+        "heading": "WHAT is the Display property?",
+        "paragraphs": [
+          "`display` determines how an element behaves in the document flow. `block` elements (like `<div>`, `<p>`) take up the full width available and start on a new line. `inline` elements (like `<a>`, `<span>`) only take up as much width as necessary and do not force a new line."
+        ]
       },
       {
-        heading: 'content-box vs border-box',
-        paragraphs: [
-          'By default, browsers use box-sizing: content-box. If you set width: 300px, padding: 20px, and border: 5px, the actual rendered width on screen becomes 350px (300 + 40 + 10). This makes grid calculations frustrating.',
-          'With box-sizing: border-box, the width you declare is the final rendered width. The padding and borders are absorbed inside the dimensions.',
-        ],
-        keyPoints: [
-          'Universal reset: *, *::before, *::after { box-sizing: border-box; }',
-          'Eliminates layout breakage when adding padding to inputs, buttons, and cards.',
-        ],
+        "heading": "WHY use Positioning?",
+        "paragraphs": [
+          "Sometimes normal flow is not enough. You might want a navigation bar to stick to the top of the screen as you scroll, or a badge to float in the corner of an image."
+        ]
       },
+      {
+        "heading": "HOW do position values work?",
+        "paragraphs": [
+          "`static` is default. `relative` moves an element relative to its normal position. `absolute` removes the element from the flow and positions it relative to its closest positioned ancestor. `fixed` positions it relative to the browser window."
+        ]
+      },
+      {
+        "heading": "WHEN to use z-index?",
+        "paragraphs": [
+          "When positioned elements overlap, the `z-index` property determines which one is in front. Higher numbers are closer to the user."
+        ]
+      }
     ],
-    codeExample: {
-      language: 'css',
-      filename: 'box-model.css',
-      code: `/* Universal Box-Sizing Reset */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* Predictable card sizing */
-.card {
-  width: 320px; /* Actual rendered width is exactly 320px */
-  padding: 24px; /* Sits INSIDE the 320px */
-  border: 2px solid #e2e8f0; /* Sits INSIDE the 320px */
-  margin: 16px; /* Exterior spacing */
-  background-color: #ffffff;
-  border-radius: 12px;
-}`,
-      explanation:
-        'With border-box, adding or modifying padding will never cause your elements to overflow or break grid columns.',
+    "codeExample": {
+      "language": "css",
+      "filename": "layout.css",
+      "explanation": "Making a sticky header and an absolutely positioned badge.",
+      "code": "/* Sticks to the top of the viewport */\nheader {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  z-index: 100;\n}\n\n/* The parent must be relative for the child to be absolute to it */\n.card {\n  position: relative;\n}\n\n/* Positioned in the top right of the .card */\n.badge {\n  position: absolute;\n  top: -10px;\n  right: -10px;\n}"
     },
-    practicalExample: {
-      title: 'Preventing Form Inputs from Breaking Container Widths',
-      scenario: 'You have a 100% width input inside a container. Without border-box, adding padding causes horizontal scrolling.',
-      code: `/* Without reset: width: 100% + 16px padding = 100% + 32px (overflows!) */
-/* With border-box: width: 100% includes the 16px padding */
-
-input.text-field {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-}`,
-      explanation:
-        'The input fits flush within its parent container without causing horizontal scrollbars.',
-      outputDescription: 'Full-width input field with comfortable interior typing space and no overflow.',
+    "practicalExample": {
+      "title": "A Floating Action Button",
+      "scenario": "You want a \"Help\" button to always remain in the bottom-right corner of the screen.",
+      "explanation": "We use `position: fixed` to attach it to the viewport, regardless of scrolling.",
+      "code": ".help-btn {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  background-color: blue;\n  color: white;\n  border-radius: 50%;\n  padding: 15px 20px;\n}"
     },
-    commonMistakes: [
+    "commonMistakes": [
       {
-        mistake: 'Assuming top/bottom margins will add together between adjacent paragraphs',
-        whyItHappens: 'Vertical margins collapse in standard block flow. If paragraph 1 has margin-bottom: 20px and paragraph 2 has margin-top: 15px, the gap between them is 20px (the larger value), not 35px.',
-        howToFix: 'Rely on single-direction margin (e.g. margin-bottom only) or use CSS Flexbox/Grid gap properties.',
-        incorrectSnippet: `p {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}`,
-        correctSnippet: `/* Use single-direction margin or flex gap */
-p + p {
-  margin-top: 1.25rem;
-}`,
-      },
+        "mistake": "Using absolute positioning without a relative parent.",
+        "whyItHappens": "If you set a child to `absolute`, it looks up the tree for a parent with `position: relative`. If it finds none, it aligns to the entire page!",
+        "howToFix": "Always set `position: relative;` on the parent container when absolutely positioning a child inside it.",
+        "incorrectSnippet": ".parent { }\n.child { position: absolute; top: 0; }",
+        "correctSnippet": ".parent { position: relative; }\n.child { position: absolute; top: 0; }"
+      }
     ],
-    practice: {
-      title: 'Build a Symmetrical Profile Badge',
-      instructions: [
-        'Write CSS for a profile badge card with exact dimensions.',
-        'Set width: 280px and height: 160px.',
-        'Add box-sizing: border-box.',
-        'Add 20px padding and a 2px solid border.',
-        'Verify that the outer rendered width stays at 280px.',
+    "practice": {
+      "title": "Hide an Element",
+      "instructions": [
+        "Target the class `.secret`.",
+        "Make it completely disappear from the page layout."
       ],
-      starterCode: `.badge {
-  /* Add box-sizing, dimensions, padding, and border */
-}`,
-      hint: 'Include box-sizing: border-box, width, padding, and border properties.',
-      solutionCode: `.badge {
-  box-sizing: border-box;
-  width: 280px;
-  height: 160px;
-  padding: 20px;
-  border: 2px solid #6366f1;
-  border-radius: 12px;
-  background-color: #ffffff;
-}`,
+      "starterCode": ".secret {\n  /* Hide it here */\n}",
+      "hint": "Use the display property.",
+      "solutionCode": ".secret {\n  display: none;\n}"
     },
-    projectConnection: {
-      title: 'Responsive Grid & Component Alignment',
-      description:
-        'Every CSS framework (Tailwind, Bootstrap) and modern design system applies box-sizing: border-box globally. Without it, fluid percentages (like width: 50%) fail whenever padding is added.',
-      howItApplies:
-        'In responsive dashboards, border-box allows sidebars and content panes to align with pixel-perfect accuracy across all viewport sizes.',
+    "projectConnection": {
+      "title": "Portfolio Project",
+      "description": "Sticky Navigation.",
+      "howItApplies": "You will use `position: fixed` to create a navigation bar that follows the user as they scroll down your portfolio."
     },
-    quiz: [
+    "quiz": [
       {
-        id: 'css-l3-q1',
-        question: 'Under box-sizing: border-box, how is the total rendered width calculated?',
-        options: [
-          'Width = declared width (padding and border are included inside)',
-          'Width = declared width + padding + border + margin',
-          'Width = declared width + padding only',
-          'Width is multiplied by the device pixel ratio',
+        "id": "css-l3-q1",
+        "question": "Which display value takes up the full width and starts on a new line?",
+        "options": [
+          "inline",
+          "block",
+          "inline-block",
+          "hidden"
         ],
-        correctOptionIndex: 0,
-        explanation:
-          'In border-box sizing, the padding and border are subtracted from the declared width, keeping total dimensions fixed.',
+        "correctOptionIndex": 1,
+        "explanation": "Block-level elements take up the entire width of their parent container."
       },
       {
-        id: 'css-l3-q2',
-        question: 'What is margin collapsing in CSS?',
-        options: [
-          'When adjacent vertical margins combine into a single margin equal to the largest of the two values',
-          'When horizontal margins disappear on mobile screens',
-          'When padding overrides margin completely',
-          'When borders break into dashed lines',
+        "id": "css-l3-q2",
+        "question": "Which position value positions an element relative to the browser window, even when scrolled?",
+        "options": [
+          "absolute",
+          "relative",
+          "fixed",
+          "static"
         ],
-        correctOptionIndex: 0,
-        explanation:
-          'In normal block flow, adjacent top and bottom margins collapse into the single largest margin value.',
+        "correctOptionIndex": 2,
+        "explanation": "`position: fixed` locks the element to the viewport."
       },
       {
-        id: 'css-l3-q3',
-        question: 'What is the recommended universal CSS reset for box sizing in modern web projects?',
-        options: [
-          '*, *::before, *::after { box-sizing: border-box; }',
-          'body { box-sizing: content-box; }',
-          'div { box-sizing: inherit; }',
-          'No reset is needed in modern browsers.',
+        "id": "css-l3-q3",
+        "question": "What property controls the stacking order of overlapping elements?",
+        "options": [
+          "stack-order",
+          "z-index",
+          "layer",
+          "depth"
         ],
-        correctOptionIndex: 0,
-        explanation:
-          'Applying border-box to all elements and pseudo-elements guarantees predictable layouts across the entire document.',
-      },
-    ],
+        "correctOptionIndex": 1,
+        "explanation": "`z-index` specifies the z-order of a positioned element and its descendants."
+      }
+    ]
   },
+  "css-l4": {
+    "id": "css-l4",
+    "courseSlug": "css",
+    "title": "Flexbox and Grid",
+    "duration": "1h",
+    "introduction": "For years, CSS layout was difficult, relying on hacks like floats and tables. Today, we have Flexbox and CSS Grid. These two powerful systems make aligning elements and building complex layouts incredibly easy.",
+    "learningObjectives": [
+      "Understand the difference between one-dimensional (Flexbox) and two-dimensional (Grid) layouts.",
+      "Use Flexbox to center elements and space them evenly.",
+      "Use CSS Grid to create a multi-column layout.",
+      "Master justify-content and align-items."
+    ],
+    "explanation": [
+      {
+        "heading": "WHAT are Flexbox and Grid?",
+        "paragraphs": [
+          "Flexbox (Flexible Box) is designed for laying out items in a single dimension—either a row OR a column. CSS Grid is designed for two-dimensional layouts—rows AND columns simultaneously."
+        ]
+      },
+      {
+        "heading": "WHY do we need both?",
+        "paragraphs": [
+          "Use Flexbox for aligning components within a section (like items in a navigation bar). Use Grid for the overall page layout (like a sidebar next to a main content area)."
+        ]
+      },
+      {
+        "heading": "HOW to use Flexbox?",
+        "paragraphs": [
+          "Set `display: flex;` on the PARENT container. Then use `justify-content` to align items along the main axis (horizontal by default), and `align-items` to align them along the cross axis (vertical)."
+        ]
+      },
+      {
+        "heading": "WHEN to use Grid?",
+        "paragraphs": [
+          "Set `display: grid;` on the parent. Use `grid-template-columns: 1fr 1fr;` to easily create two columns of equal width."
+        ]
+      }
+    ],
+    "codeExample": {
+      "language": "css",
+      "filename": "flex.css",
+      "explanation": "Centering an item perfectly in the middle of a screen, which used to be notoriously difficult in CSS.",
+      "code": ".parent {\n  display: flex;\n  /* Center horizontally */\n  justify-content: center;\n  /* Center vertically */\n  align-items: center;\n  height: 100vh; /* Full viewport height */\n}"
+    },
+    "practicalExample": {
+      "title": "A Navigation Bar",
+      "scenario": "You want a logo on the far left, and navigation links on the far right.",
+      "explanation": "Flexbox makes this trivial using `justify-content: space-between`.",
+      "code": ".navbar {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding: 20px;\n  background: #333;\n  color: white;\n}"
+    },
+    "commonMistakes": [
+      {
+        "mistake": "Applying flex properties to the children.",
+        "whyItHappens": "Beginners try to set `justify-content: center` on the item they want to move.",
+        "howToFix": "Flexbox properties like `justify-content` and `align-items` MUST be applied to the PARENT container (`display: flex`), not the children.",
+        "incorrectSnippet": ".child { display: flex; justify-content: center; }",
+        "correctSnippet": ".parent { display: flex; justify-content: center; }"
+      }
+    ],
+    "practice": {
+      "title": "Create a 3-Column Grid",
+      "instructions": [
+        "Target the class `.grid-container`.",
+        "Enable CSS Grid.",
+        "Create three equal columns using the `1fr` unit."
+      ],
+      "starterCode": ".grid-container {\n  /* Your code here */\n  gap: 20px;\n}",
+      "hint": "Use `display: grid` and `grid-template-columns`.",
+      "solutionCode": ".grid-container {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  gap: 20px;\n}"
+    },
+    "projectConnection": {
+      "title": "Portfolio Project",
+      "description": "Project Gallery.",
+      "howItApplies": "You will use CSS Grid to create a responsive photo gallery of your past projects."
+    },
+    "quiz": [
+      {
+        "id": "css-l4-q1",
+        "question": "Which layout system is best for 1-dimensional layouts (rows OR columns)?",
+        "options": [
+          "CSS Grid",
+          "Floats",
+          "Flexbox",
+          "Tables"
+        ],
+        "correctOptionIndex": 2,
+        "explanation": "Flexbox is designed for one-dimensional layouts."
+      },
+      {
+        "id": "css-l4-q2",
+        "question": "In a default Flexbox row, which property centers items horizontally?",
+        "options": [
+          "align-items: center",
+          "text-align: center",
+          "vertical-align: middle",
+          "justify-content: center"
+        ],
+        "correctOptionIndex": 3,
+        "explanation": "`justify-content` aligns items along the main axis, which is horizontal by default in flex rows."
+      },
+      {
+        "id": "css-l4-q3",
+        "question": "What does `1fr` mean in CSS Grid?",
+        "options": [
+          "1 frame rate",
+          "1 fraction of the available space",
+          "1 free row",
+          "1 font rem"
+        ],
+        "correctOptionIndex": 1,
+        "explanation": "`fr` stands for fraction, taking up a portion of the available free space in the grid container."
+      }
+    ]
+  },
+  "css-l5": {
+    "id": "css-l5",
+    "courseSlug": "css",
+    "title": "Responsive Design & Animations",
+    "duration": "1h",
+    "introduction": "A website must look good on a giant 4K monitor and a tiny mobile phone. In this final CSS lesson, we will learn how to make designs responsive using Media Queries, and add polish with CSS transitions.",
+    "learningObjectives": [
+      "Understand the mobile-first design approach.",
+      "Write media queries to change CSS based on screen size.",
+      "Add smooth CSS transitions to hover states.",
+      "Use CSS variables to manage colors."
+    ],
+    "explanation": [
+      {
+        "heading": "WHAT are Media Queries?",
+        "paragraphs": [
+          "Media queries are CSS rules that only apply when certain conditions are met, such as the screen being smaller or wider than a specific width."
+        ]
+      },
+      {
+        "heading": "WHY use Mobile-First?",
+        "paragraphs": [
+          "It is usually easier to write the CSS for a mobile layout first (stacked columns), and then use media queries with `min-width` to add complexity (like side-by-side grids) for larger screens."
+        ]
+      },
+      {
+        "heading": "HOW to add Transitions?",
+        "paragraphs": [
+          "Instead of a button instantly turning blue on hover, a `transition` tells the browser to animate the change smoothly over a set duration."
+        ]
+      },
+      {
+        "heading": "WHEN to use CSS Variables?",
+        "paragraphs": [
+          "If your brand color is `#FF5733`, do not type it 50 times. Define it once as `--primary-color: #FF5733;` and use `var(--primary-color)` everywhere."
+        ]
+      }
+    ],
+    "codeExample": {
+      "language": "css",
+      "filename": "responsive.css",
+      "explanation": "A mobile-first approach. The layout is 1 column by default, but changes to 2 columns on screens wider than 768px.",
+      "code": "/* Mobile first: 1 column */\n.layout {\n  display: grid;\n  grid-template-columns: 1fr;\n}\n\n/* Desktop: 2 columns */\n@media (min-width: 768px) {\n  .layout {\n    grid-template-columns: 1fr 1fr;\n  }\n}"
+    },
+    "practicalExample": {
+      "title": "A Smooth Hover Button",
+      "scenario": "You want a button to smoothly change color when the user hovers over it.",
+      "explanation": "The `transition` property on the base element dictates how the `:hover` state animates.",
+      "code": ".btn {\n  background-color: blue;\n  color: white;\n  /* Animate background-color over 0.3 seconds */\n  transition: background-color 0.3s ease;\n}\n\n.btn:hover {\n  background-color: darkblue;\n}"
+    },
+    "commonMistakes": [
+      {
+        "mistake": "Putting the transition on the :hover state.",
+        "whyItHappens": "It seems logical to put the animation code on the hover rule.",
+        "howToFix": "The transition must go on the BASE class. If you put it on `:hover`, it will animate on hover, but snap back instantly when the mouse leaves.",
+        "incorrectSnippet": ".btn { }\n.btn:hover { transition: all 0.3s; color: red; }",
+        "correctSnippet": ".btn { transition: all 0.3s; }\n.btn:hover { color: red; }"
+      }
+    ],
+    "practice": {
+      "title": "Write a Media Query",
+      "instructions": [
+        "Write a media query that triggers when the screen is at least `1024px` wide.",
+        "Inside it, change the `.container` class background to green."
+      ],
+      "starterCode": "/* Write your media query below */\n",
+      "hint": "Use `@media (min-width: ...)`",
+      "solutionCode": "@media (min-width: 1024px) {\n  .container {\n    background-color: green;\n  }\n}"
+    },
+    "projectConnection": {
+      "title": "Portfolio Project",
+      "description": "Mobile Optimization.",
+      "howItApplies": "You will use media queries to ensure your portfolio looks perfect on iPhones and tablets, not just laptops."
+    },
+    "quiz": [
+      {
+        "id": "css-l5-q1",
+        "question": "What at-rule is used to apply CSS only at specific screen widths?",
+        "options": [
+          "@screen",
+          "@responsive",
+          "@media",
+          "@viewport"
+        ],
+        "correctOptionIndex": 2,
+        "explanation": "`@media` is used to create media queries."
+      },
+      {
+        "id": "css-l5-q2",
+        "question": "In the mobile-first approach, which media feature is most commonly used?",
+        "options": [
+          "max-width",
+          "min-width",
+          "device-width",
+          "orientation"
+        ],
+        "correctOptionIndex": 1,
+        "explanation": "`min-width` is used to add styles as the screen gets larger (desktop)."
+      },
+      {
+        "id": "css-l5-q3",
+        "question": "Where should the `transition` property be placed for a hover effect?",
+        "options": [
+          "On the :hover selector",
+          "On the base selector",
+          "On the parent container",
+          "In the HTML inline styles"
+        ],
+        "correctOptionIndex": 1,
+        "explanation": "It should be on the base selector so it animates both when hovering AND when un-hovering."
+      }
+    ]
+  }
 };

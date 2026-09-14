@@ -316,8 +316,11 @@ function AppContent() {
         <Helmet>
           <title>CLOUD Coding Platform - Master Web Development</title>
           <meta name="description" content="Master web development with CLOUD. We offer courses in HTML, CSS, JavaScript, React, and Python. Join today and start building." />
+          <meta name="keywords" content="learn to code, web development, HTML course, CSS course, JavaScript course, React tutorial, learn Python" />
           <meta property="og:title" content="CLOUD Coding Platform - Master Web Development" />
           <meta property="og:description" content="Master web development with CLOUD. We offer courses in HTML, CSS, JavaScript, React, and Python." />
+          <meta name="twitter:title" content="CLOUD Coding Platform - Master Web Development" />
+          <meta name="twitter:description" content="Master web development with CLOUD. We offer courses in HTML, CSS, JavaScript, React, and Python." />
           <link rel="canonical" href="https://ais-dev-wxpc3j32im2tzkdtnkbetd-449991474091.europe-west2.run.app/" />
         </Helmet>
       )}

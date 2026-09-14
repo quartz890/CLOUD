@@ -90,9 +90,12 @@ export const LearnPage: React.FC<LearnPageProps> = ({
       <Helmet>
         <title>Coding Courses: HTML, CSS, JavaScript, React, Python | CLOUD</title>
         <meta name="description" content="Explore our library of premium coding courses. Learn HTML, CSS, JavaScript, React, and Python through structured, interactive lessons." />
+        <meta name="keywords" content="coding courses, programming lessons, learn HTML, learn CSS, learn JavaScript, learn React, learn Python" />
         <link rel="canonical" href="https://ais-dev-wxpc3j32im2tzkdtnkbetd-449991474091.europe-west2.run.app/" />
         <meta property="og:title" content="Coding Courses: HTML, CSS, JavaScript, React, Python | CLOUD" />
         <meta property="og:description" content="Explore our library of premium coding courses. Learn HTML, CSS, JavaScript, React, and Python through structured, interactive lessons." />
+        <meta name="twitter:title" content="Coding Courses: HTML, CSS, JavaScript, React, Python | CLOUD" />
+        <meta name="twitter:description" content="Explore our library of premium coding courses. Learn HTML, CSS, JavaScript, React, and Python through structured, interactive lessons." />
       </Helmet>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

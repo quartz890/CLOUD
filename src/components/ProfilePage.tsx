@@ -74,6 +74,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
       <Helmet>
         <title>Profile | CLOUD Coding Platform</title>
         <meta name="description" content="View your CLOUD user profile and completed learning." />
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       
       <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8">

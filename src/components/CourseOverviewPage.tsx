@@ -147,9 +147,12 @@ export const CourseOverviewPage: React.FC<CourseOverviewPageProps> = ({
       <Helmet>
         <title>{course.title} Course | CLOUD Coding Platform</title>
         <meta name="description" content={`Learn ${course.title} online. ${course.shortDescription} Start this ${course.difficulty.toLowerCase()} course featuring ${course.lessonsCount} lessons.`} />
+        <meta name="keywords" content={`learn ${course.title}, ${course.title} course, online coding, programming tutorial`} />
         <link rel="canonical" href={`https://ais-dev-wxpc3j32im2tzkdtnkbetd-449991474091.europe-west2.run.app/courses/${course.slug}`} />
         <meta property="og:title" content={`${course.title} Course | CLOUD`} />
         <meta property="og:description" content={`Learn ${course.title} online. ${course.shortDescription}`} />
+        <meta name="twitter:title" content={`${course.title} Course | CLOUD`} />
+        <meta name="twitter:description" content={`Learn ${course.title} online. ${course.shortDescription}`} />
       </Helmet>
       
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

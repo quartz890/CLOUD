@@ -291,6 +291,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       <Helmet>
         <title>Dashboard | CLOUD Coding Platform</title>
         <meta name="description" content="View your progress, track your achievements, and continue learning on CLOUD." />
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       
       <div className="max-w-5xl mx-auto px-3 sm:px-6 lg:px-8 space-y-4 sm:space-y-8">

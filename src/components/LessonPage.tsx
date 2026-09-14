@@ -4,7 +4,6 @@ import { Course, Lesson, CourseModule } from '../types';
 import { getLessonDetail } from '../data/lessonContents';
 import { CourseIcon } from './CourseIcon';
 import { LessonQuiz, StoredQuizState } from './LessonQuiz';
-import { AIHelpSection } from './AIHelpSection';
 import {
   ArrowLeft,
   ArrowRight,
@@ -112,9 +111,12 @@ export const LessonPage: React.FC<LessonPageProps> = ({
       <Helmet>
         <title>{currentLesson.title} | {course.title} | CLOUD Coding Platform</title>
         <meta name="description" content={`Learn about ${currentLesson.title} in the ${course.title} course on CLOUD. ${detail.introduction}`} />
+        <meta name="keywords" content={`${currentLesson.title}, ${course.title} lesson, coding tutorial, learn programming`} />
         <link rel="canonical" href={`https://ais-dev-wxpc3j32im2tzkdtnkbetd-449991474091.europe-west2.run.app/courses/${course.slug}/lessons/${currentLesson.id}`} />
         <meta property="og:title" content={`${currentLesson.title} | ${course.title} | CLOUD`} />
         <meta property="og:description" content={`Learn about ${currentLesson.title} in the ${course.title} course on CLOUD.`} />
+        <meta name="twitter:title" content={`${currentLesson.title} | ${course.title} | CLOUD`} />
+        <meta name="twitter:description" content={`Learn about ${currentLesson.title} in the ${course.title} course on CLOUD.`} />
       </Helmet>
 
       {/* Top Header & Breadcrumbs Bar */}
@@ -699,13 +701,6 @@ export const LessonPage: React.FC<LessonPageProps> = ({
             )}
 
             {/* Interactive Lesson Quiz Section */}
-            <AIHelpSection
-              course={course}
-              moduleTitle={currentModule.title}
-              lesson={currentLesson}
-              lessonContent={JSON.stringify(detail)}
-            />
-
             <LessonQuiz
               key={currentLesson.id}
               lessonId={currentLesson.id}

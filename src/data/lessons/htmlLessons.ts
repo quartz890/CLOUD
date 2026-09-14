@@ -1,1014 +1,575 @@
-import { LessonDetail } from '../../types';
+import { LessonDetail } from '../types';
 
 export const HTML_LESSONS: Record<string, LessonDetail> = {
-  'html-l1': {
-    id: 'html-l1',
-    courseSlug: 'html',
-    title: 'What is HTML & How the Web Works',
-    duration: '10 min',
-    introduction:
-      'Every webpage you visit on the internet—from Google and Wikipedia to YouTube—relies on HTML as its structural backbone. In this lesson, you will discover what HTML actually is, how web browsers translate raw text into interactive visual documents, and why writing clean markup is the first and most critical skill in web development.',
-    learningObjectives: [
-      'Understand what HTML stands for and its core role alongside CSS and JavaScript',
-      'Learn the request-response cycle between your web browser (client) and a web server',
-      'Discover how the browser parses HTML tags into the Document Object Model (DOM)',
-      'Understand the anatomy of an HTML element: opening tag, content, and closing tag',
+  "html-l1": {
+    "id": "html-l1",
+    "courseSlug": "html",
+    "title": "Document Structure & Basic Elements",
+    "duration": "1h",
+    "introduction": "Welcome to HTML! HTML (HyperText Markup Language) is the standard language for creating webpages. In this lesson, we will learn the essential building blocks that make up every webpage on the internet, starting from the basic document structure.",
+    "learningObjectives": [
+      "Understand what HTML is and how it structures web content.",
+      "Learn the basic boilerplate of an HTML document.",
+      "Use basic elements like headings and paragraphs to format text.",
+      "Understand the difference between opening and closing tags."
     ],
-    explanation: [
+    "explanation": [
       {
-        heading: 'What Does HTML Actually Stand For?',
-        paragraphs: [
-          'HTML stands for HyperText Markup Language. It is not a programming language like Python or JavaScript; it is a markup language. A markup language uses a system of standardized annotations (called "tags") to tell a computer program how text, images, and other resources should be structured and displayed.',
-          'HyperText refers to text that contains links to other texts or pages—allowing users to navigate interconnected documents with a simple click. Markup refers to the special tags wrapped in angle brackets (like <p> or <h1>) that describe the purpose and meaning of the content inside them.',
-        ],
-        keyPoints: [
-          'HTML is about structure and meaning (semantics), not visual styling.',
-          'CSS controls how the markup looks (colors, layouts, fonts).',
-          'JavaScript controls how the page behaves (interactivity, state, fetching data).',
-        ],
+        "heading": "WHAT is HTML?",
+        "paragraphs": [
+          "HTML stands for HyperText Markup Language. It is not a programming language, but a markup language that defines the structure of your content. Think of it as the skeleton of a webpage."
+        ]
       },
       {
-        heading: 'How the Web Works: The Client and The Server',
-        paragraphs: [
-          'When you type a website address like "https://example.com" into your browser address bar and press Enter, your computer acts as a client. Your browser sends an HTTP request over the internet to a remote computer called a web server.',
-          'The web server locates the requested file (often named "index.html") and responds by transmitting the raw HTML text code back to your browser over network packets.',
-          'Once the browser receives that text stream, the browser engine begins reading it from top to bottom. It translates the tags into an internal tree structure called the Document Object Model (DOM) and renders the visual pixels onto your screen.',
-        ],
+        "heading": "WHY do we need it?",
+        "paragraphs": [
+          "Without HTML, a web browser would not know how to display text, images, or links. HTML tells the browser \"this is a heading,\" \"this is a paragraph,\" or \"this is a link.\""
+        ]
       },
       {
-        heading: 'Anatomy of an HTML Element',
-        paragraphs: [
-          'Most elements in HTML consist of three basic parts: an opening tag, the inner content, and a closing tag. The closing tag looks identical to the opening tag, but includes a forward slash (/) right after the opening angle bracket.',
-          'Elements can also carry attributes. Attributes provide extra information or configuration for an element (such as an image source, a link destination, or a unique identifier) and are always specified inside the opening tag.',
-        ],
-        keyPoints: [
-          'Opening Tag: <p> indicates the start of a paragraph.',
-          'Content: The text or nested elements sitting between the tags.',
-          'Closing Tag: </p> indicates where the paragraph ends.',
-          'Self-closing (Void) elements: Some elements have no content and do not require a closing tag, such as <img>, <br>, and <meta>.',
-        ],
+        "heading": "HOW does it work?",
+        "paragraphs": [
+          "HTML uses \"tags\" to wrap around content. Most tags come in pairs: an opening tag (like `<p>`) and a closing tag (like `</p>`). Everything inside the tags is affected by them."
+        ]
       },
+      {
+        "heading": "WHEN to use specific tags?",
+        "paragraphs": [
+          "Use `<h1>` for the main title of your page, and `<p>` for regular text. A standard HTML document always starts with a `<!DOCTYPE html>` declaration, followed by an `<html>` element containing a `<head>` and a `<body>`."
+        ]
+      }
     ],
-    codeExample: {
-      language: 'html',
-      filename: 'element-anatomy.html',
-      code: `<!-- Anatomy of a standard HTML element -->
-<p class="intro-text">Welcome to the world of web development!</p>
-
-<!-- Anatomy of an element with multiple attributes -->
-<a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">
-  Visit MDN Web Docs
-</a>
-
-<!-- Anatomy of a void (self-closing) element -->
-<img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600" alt="Code on a laptop screen" />`,
-      explanation:
-        'Notice how the <p> tag surrounds the text content. The <a> tag uses the "href" attribute to define where the link leads, and the <img> tag specifies the image source using the "src" attribute and accessible fallback description using "alt".',
+    "codeExample": {
+      "language": "html",
+      "filename": "index.html",
+      "explanation": "This is the standard boilerplate for every HTML page.",
+      "code": "<!DOCTYPE html>\n<html>\n  <head>\n    <title>My First Webpage</title>\n  </head>\n  <body>\n    <h1>Welcome to My Website</h1>\n    <p>This is my very first paragraph of text.</p>\n  </body>\n</html>"
     },
-    practicalExample: {
-      title: 'A Minimal Working Webpage',
-      scenario:
-        'Imagine creating your very first independent HTML file on your computer named "index.html". Here is the simplest complete structure that any browser will happily parse and render.',
-      code: `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>My First Webpage</title>
-  </head>
-  <body>
-    <h1>Hello, World!</h1>
-    <p>This is my first webpage structured with semantic HTML.</p>
-    <p>Browsers read this document and draw the text on your screen.</p>
-  </body>
-</html>`,
-      explanation:
-        'When you double-click an HTML file on your desktop, your default browser opens it immediately. You do not need a compiler or special software to run HTML—the browser itself is the execution engine.',
-      outputDescription:
-        'Displays a large bold heading saying "Hello, World!" followed by two distinct paragraphs with default browser spacing.',
+    "practicalExample": {
+      "title": "A Personal Bio Page",
+      "scenario": "Imagine you are creating a simple page to introduce yourself.",
+      "explanation": "Notice how the h1 is the main title, h2 is a subtitle, and paragraphs separate the thoughts.",
+      "code": "<h1>About John Doe</h1>\n<h2>Web Developer in Training</h2>\n<p>Hello! I am learning how to code.</p>\n<p>My goal is to build amazing websites.</p>"
     },
-    commonMistakes: [
+    "commonMistakes": [
       {
-        mistake: 'Forgetting to close tags (e.g., writing <p>Hello without </p>)',
-        whyItHappens:
-          'When learning, it is easy to forget the closing tag with the forward slash. While modern browsers try to auto-correct errors ("quirks mode"), unclosed tags cause unpredictable layout bugs and broken layouts downstream.',
-        howToFix: 'Always write the closing tag immediately when creating an element, or use code editor auto-close extensions.',
-        incorrectSnippet: `<p>This is paragraph one.
-<p>This is paragraph two.`,
-        correctSnippet: `<p>This is paragraph one.</p>
-<p>This is paragraph two.</p>`,
-      },
-      {
-        mistake: 'Using HTML tags for visual formatting instead of semantic meaning',
-        whyItHappens: 'Beginners sometimes use <b> or <i> just to make words bold or italic, rather than using CSS or semantic tags like <strong> or <em>.',
-        howToFix: 'Use HTML purely for structural meaning and accessibility, and use CSS for visual appearance.',
-        incorrectSnippet: `<p><b>Warning:</b> Do not enter.</p>`,
-        correctSnippet: `<p><strong>Warning:</strong> Do not enter.</p>`,
-      },
+        "mistake": "Forgetting the closing tag.",
+        "whyItHappens": "It is easy to type `<p>Hello` and forget the `</p>`.",
+        "howToFix": "Always double-check that every opening tag has a matching closing tag with a forward slash.",
+        "incorrectSnippet": "<p>This is a paragraph.",
+        "correctSnippet": "<p>This is a paragraph.</p>"
+      }
     ],
-    practice: {
-      title: 'Create Your Personal Profile Markup',
-      instructions: [
-        'Open a text editor and structure an HTML snippet for a developer bio card.',
-        'Include a main heading (<h1>) with your name or username.',
-        'Add a short paragraph (<p>) describing what programming concepts you want to learn.',
-        'Add a link (<a>) pointing to your favorite tech documentation site.',
+    "practice": {
+      "title": "Create Your First Page",
+      "instructions": [
+        "Create an HTML document structure.",
+        "Add an h1 heading saying \"My Favorite Hobby\".",
+        "Add a paragraph describing your hobby."
       ],
-      starterCode: `<!-- Write your profile card snippet here -->
-<h1>Developer Name</h1>
-<p>I am learning HTML to...</p>
-<a href="https://example.com">My Favorite Resource</a>`,
-      hint: 'Ensure every opening tag matches with an appropriate closing tag and use quotes around attribute values.',
-      solutionCode: `<h1>Alex Johnson</h1>
-<p>I am learning HTML and CSS to build accessible, lightning-fast web applications.</p>
-<a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">
-  Explore MDN Web Docs
-</a>`,
+      "starterCode": "<!DOCTYPE html>\n<html>\n  <body>\n    <!-- Add your code here -->\n  </body>\n</html>",
+      "hint": "Remember the <h1> and <p> tags.",
+      "solutionCode": "<!DOCTYPE html>\n<html>\n  <body>\n    <h1>My Favorite Hobby</h1>\n    <p>I love playing chess in my free time.</p>\n  </body>\n</html>"
     },
-    projectConnection: {
-      title: 'Foundation of Every Single Web Application',
-      description:
-        'Whether an application is built in Next.js, Vue, Angular, or raw vanilla scripts, the browser ultimately only understands HTML, CSS, and JavaScript. The DOM tree you establish here is what APIs query and what search engines index.',
-      howItApplies:
-        'When building a real product like a blog or an e-commerce checkout, search crawlers (like Googlebot) read the raw HTML before executing complex JavaScript. Clean markup directly determines your search engine visibility and accessibility score.',
+    "projectConnection": {
+      "title": "Portfolio Project",
+      "description": "Your final project will be a personal portfolio.",
+      "howItApplies": "The document structure and basic text elements you learned here will form the foundation of your entire portfolio webpage."
     },
-    quiz: [
+    "quiz": [
       {
-        id: 'html-l1-q1',
-        question: 'What is the primary responsibility of HTML in a modern web stack?',
-        options: [
-          'Defining the structural content and semantic meaning of a webpage',
-          'Controlling animations, colors, and responsive grid layouts',
-          'Executing server-side database queries and managing user sessions',
-          'Encrypting HTTPS network traffic between the client and server',
+        "id": "html-l1-q1",
+        "question": "What does HTML stand for?",
+        "options": [
+          "HyperText Markup Language",
+          "HyperText Machine Language",
+          "Hyper Transfer Markup Language",
+          "High Text Markup Language"
         ],
-        correctOptionIndex: 0,
-        explanation:
-          'HTML is the markup language responsible for structural content and semantic hierarchy. CSS handles presentation/styling, and JavaScript handles dynamic behavior.',
+        "correctOptionIndex": 0,
+        "explanation": "HTML stands for HyperText Markup Language."
       },
       {
-        id: 'html-l1-q2',
-        question: 'Which of the following is a self-closing (void) element in HTML5?',
-        options: [
-          '<p>',
-          '<h1>',
-          '<img>',
-          '<section>',
+        "id": "html-l1-q2",
+        "question": "Which tag is used for the largest heading?",
+        "options": [
+          "<heading>",
+          "<h6>",
+          "<h1>",
+          "<head>"
         ],
-        correctOptionIndex: 2,
-        explanation:
-          'The <img> element is a void element because it cannot contain child text or elements; its content is defined solely via attributes like src and alt.',
+        "correctOptionIndex": 2,
+        "explanation": "<h1> is the most important (and largest by default) heading."
       },
       {
-        id: 'html-l1-q3',
-        question: 'What happens when a browser downloads an HTML file from a web server?',
-        options: [
-          'It compiles the code into binary machine bytecode.',
-          'It parses the HTML markup from top to bottom and builds the Document Object Model (DOM).',
-          'It converts all tags into relational database tables.',
-          'It rejects any file that does not have an active JavaScript backend.',
+        "id": "html-l1-q3",
+        "question": "Where does the visible content of a webpage go?",
+        "options": [
+          "Inside the <head>",
+          "Inside the <body>",
+          "Outside the <html> tag",
+          "Inside the <title>"
         ],
-        correctOptionIndex: 1,
-        explanation:
-          'The browser parsing engine reads the HTML text stream and builds a node tree in memory called the DOM, which is then rendered onto the screen.',
-      },
-    ],
+        "correctOptionIndex": 1,
+        "explanation": "All visible content must be placed inside the <body> tag."
+      }
+    ]
   },
-
-  'html-l2': {
-    id: 'html-l2',
-    courseSlug: 'html',
-    title: 'The Modern HTML5 Boilerplate',
-    duration: '12 min',
-    introduction:
-      'Every production webpage begins with a standardized document template. In this lesson, you will dissect the HTML5 boilerplate line by line, discovering why <!DOCTYPE html> is essential, what the <html>, <head>, and <body> elements do, and how they work in harmony.',
-    learningObjectives: [
-      'Understand the purpose of the <!DOCTYPE html> declaration and quirks mode prevention',
-      'Learn the roles and differences between the <head> and <body> zones',
-      'Configure the root <html lang="en"> element for screen readers and search engines',
-      'Recognize where scripts, stylesheets, and visual elements belong in a document',
+  "html-l2": {
+    "id": "html-l2",
+    "courseSlug": "html",
+    "title": "Links, Images, and Lists",
+    "duration": "1h",
+    "introduction": "Text is great, but the web is built on connections and media. In this lesson, we will learn how to link pages together, embed images, and organize content using bulleted and numbered lists.",
+    "learningObjectives": [
+      "Create clickable hyperlinks to other websites.",
+      "Embed images using the img tag and understand the alt attribute.",
+      "Create unordered (bulleted) and ordered (numbered) lists.",
+      "Understand self-closing tags."
     ],
-    explanation: [
+    "explanation": [
       {
-        heading: 'The Role of <!DOCTYPE html>',
-        paragraphs: [
-          'The very first line of any modern HTML document must be <!DOCTYPE html>. This is not an HTML tag; it is a document type declaration instruction to the web browser.',
-          'Without this line, modern browsers revert into a legacy behavior known as "quirks mode", rendering CSS and layout rules using 1990s Netscape/Internet Explorer bugs rather than modern W3C standards.',
-        ],
-        keyPoints: [
-          'Case-insensitive, but <!DOCTYPE html> in uppercase is the universal convention.',
-          'Must be the absolute first character sequence in the file (no comments or empty spaces before it).',
-        ],
+        "heading": "WHAT are Links and Images?",
+        "paragraphs": [
+          "Links (anchors) connect webpages together, forming the \"web\". Images add visual content. Lists organize related items into readable formats."
+        ]
       },
       {
-        heading: 'The Two Halves: <head> vs <body>',
-        paragraphs: [
-          'An HTML document is divided into two distinct zones inside the root <html> element: the <head> and the <body>.',
-          'The <head> element contains metadata: instructions for the browser and search engines that are NOT directly drawn on the main webpage canvas. This includes character encoding, viewport settings, title, icons, and links to external CSS.',
-          'The <body> element contains everything the user actually sees and interacts with: text, buttons, navigation bars, images, tables, and footers.',
-        ],
+        "heading": "WHY are they important?",
+        "paragraphs": [
+          "Without links, every webpage would be an isolated island. Without images, the web would be boring text. Lists make content scannable and easy to read."
+        ]
       },
+      {
+        "heading": "HOW do we use them?",
+        "paragraphs": [
+          "We use the `<a>` tag for links, requiring an `href` attribute to specify the destination. We use the `<img>` tag for images, requiring a `src` attribute for the image file and an `alt` attribute for screen readers. Lists use `<ul>` (unordered) or `<ol>` (ordered), containing `<li>` (list item) tags."
+        ]
+      },
+      {
+        "heading": "WHEN to use alt text?",
+        "paragraphs": [
+          "Always! The `alt` attribute on an image is crucial for visually impaired users who use screen readers, and it displays if the image fails to load."
+        ]
+      }
     ],
-    codeExample: {
-      language: 'html',
-      filename: 'index.html',
-      code: `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaaS Product - Fast, Clean Learning</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <header>
-      <h1>Welcome to Cloud Learning</h1>
-    </header>
-    <main>
-      <p>Start your learning journey today.</p>
-    </main>
-  </body>
-</html>`,
-      explanation:
-        'This is the industry standard HTML5 boilerplate. The lang="en" attribute informs translation tools and screen readers that the document is written in English.',
+    "codeExample": {
+      "language": "html",
+      "filename": "media.html",
+      "explanation": "Here is how to create a link, an image, and an unordered list.",
+      "code": "<a href=\"https://google.com\">Go to Google</a>\n\n<img src=\"logo.png\" alt=\"Company Logo\">\n\n<ul>\n  <li>Apples</li>\n  <li>Bananas</li>\n</ul>"
     },
-    practicalExample: {
-      title: 'Setting Up a Production Project Entry File',
-      scenario:
-        'When you initialize any new frontend application (such as Vite, Create React App, or a static portfolio), the index.html file provides this exact foundation.',
-      code: `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Master coding concepts step by step.">
-    <title>Portfolio - Jane Doe</title>
-  </head>
-  <body>
-    <div id="root">
-      <h2>Jane Doe — Software Engineer</h2>
-      <p>Building accessible web applications.</p>
-    </div>
-  </body>
-</html>`,
-      explanation:
-        'Even single-page JavaScript apps mount inside the <body> of this standard boilerplate document.',
-      outputDescription: 'Renders a clean white webpage with the document title displayed in the browser tab and the heading in the viewport.',
+    "practicalExample": {
+      "title": "A Recipe Page",
+      "scenario": "You are building a recipe page that needs an image of the dish and a list of ingredients.",
+      "explanation": "The image provides visual appeal, and the unordered list makes the ingredients easy to read.",
+      "code": "<h2>Pancakes</h2>\n<img src=\"pancakes.jpg\" alt=\"A stack of fluffy pancakes with syrup\">\n<h3>Ingredients</h3>\n<ul>\n  <li>1 cup flour</li>\n  <li>1 cup milk</li>\n  <li>1 egg</li>\n</ul>"
     },
-    commonMistakes: [
+    "commonMistakes": [
       {
-        mistake: 'Placing visible UI elements (like <h1> or <p>) inside the <head>',
-        whyItHappens: 'Misunderstanding the separation of metadata versus visible canvas elements.',
-        howToFix: 'All visible content belongs exclusively inside <body>. The <head> is strictly for <meta>, <title>, <link>, and <style>.',
-        incorrectSnippet: `<head>
-  <title>My Page</title>
-  <h1>Welcome to my website</h1>
-</head>`,
-        correctSnippet: `<head>
-  <title>My Page</title>
-</head>
-<body>
-  <h1>Welcome to my website</h1>
-</body>`,
-      },
+        "mistake": "Forgetting the alt attribute on images.",
+        "whyItHappens": "The image still displays visually without it, so developers forget it.",
+        "howToFix": "Always include `alt=\"description\"` inside your `<img>` tag.",
+        "incorrectSnippet": "<img src=\"cat.jpg\">",
+        "correctSnippet": "<img src=\"cat.jpg\" alt=\"A cute orange cat sleeping\">"
+      }
     ],
-    practice: {
-      title: 'Build a Complete HTML5 Document',
-      instructions: [
-        'Write a complete HTML5 boilerplate from memory.',
-        'Declare <!DOCTYPE html> on line 1.',
-        'Wrap the document in an <html lang="en"> tag.',
-        'Add a <head> containing a <meta charset="UTF-8"> and a descriptive <title>.',
-        'In the <body>, create a level 1 heading and a welcome paragraph.',
+    "practice": {
+      "title": "Build a Navigation Menu",
+      "instructions": [
+        "Create an unordered list.",
+        "Add two list items.",
+        "Inside each list item, add a link (one to Home, one to About)."
       ],
-      starterCode: `<!-- Write your HTML5 boilerplate from scratch below -->
-`,
-      hint: 'Remember the document structure: DOCTYPE -> html -> head + body -> closing html tag.',
-      solutionCode: `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Developer Portfolio</title>
-  </head>
-  <body>
-    <h1>Alex Rivera</h1>
-    <p>Frontend engineer passionate about accessible interfaces.</p>
-  </body>
-</html>`,
+      "starterCode": "<!-- Add your list here -->",
+      "hint": "Wrap <a> tags inside <li> tags, inside a <ul>.",
+      "solutionCode": "<ul>\n  <li><a href=\"index.html\">Home</a></li>\n  <li><a href=\"about.html\">About</a></li>\n</ul>"
     },
-    projectConnection: {
-      title: 'Standard Entry Point for All Web Projects',
-      description:
-        'Every single modern web framework (React, Next.js, Angular, Svelte) generates or relies on a base HTML5 boilerplate. Setting up the correct meta tags and lang attributes prevents layout shifts on mobile devices.',
-      howItApplies:
-        'In production, forgetting meta viewport or lang attributes causes mobile browsers to zoom out to a 980px desktop view, instantly ruining the mobile user experience.',
+    "projectConnection": {
+      "title": "Portfolio Project",
+      "description": "Adding navigation and project images.",
+      "howItApplies": "You will use lists to create the navigation bar of your portfolio, and images to show off screenshots of your past work."
     },
-    quiz: [
+    "quiz": [
       {
-        id: 'html-l2-q1',
-        question: 'What is the primary reason for including <!DOCTYPE html> on the first line?',
-        options: [
-          'It forces the browser to render the page in modern standards mode rather than quirks mode.',
-          'It connects the document to a remote database server.',
-          'It activates the JavaScript V8 execution engine.',
-          'It imports the default Google fonts into the browser cache.',
+        "id": "html-l2-q1",
+        "question": "Which tag is used to create a hyperlink?",
+        "options": [
+          "<link>",
+          "<a>",
+          "<href>",
+          "<hyperlink>"
         ],
-        correctOptionIndex: 0,
-        explanation:
-          'The <!DOCTYPE html> declaration instructs modern browsers to interpret CSS and HTML according to modern W3C standards mode.',
+        "correctOptionIndex": 1,
+        "explanation": "The <a> (anchor) tag is used to create hyperlinks."
       },
       {
-        id: 'html-l2-q2',
-        question: 'Which element is designed exclusively for metadata and cannot contain visible UI elements?',
-        options: ['<body>', '<head>', '<main>', '<header>'],
-        correctOptionIndex: 1,
-        explanation:
-          'The <head> section is dedicated strictly to document metadata like title, charset, meta tags, and stylesheet links.',
-      },
-      {
-        id: 'html-l2-q3',
-        question: 'Why is the attribute lang="en" placed on the <html> root element?',
-        options: [
-          'To force the operating system to install English fonts',
-          'To assist screen readers with pronunciation and search engines with language indexing',
-          'To validate that all CSS class names are written in English',
-          'To enable English spellchecking on every input element automatically',
+        "id": "html-l2-q2",
+        "question": "Which attribute specifies the image URL?",
+        "options": [
+          "href",
+          "src",
+          "link",
+          "url"
         ],
-        correctOptionIndex: 1,
-        explanation:
-          'Declaring the language helps assistive technology (screen readers) pronounce words correctly and enables search engines to route users to the appropriate language version.',
+        "correctOptionIndex": 1,
+        "explanation": "The `src` (source) attribute specifies the path to the image."
       },
-    ],
+      {
+        "id": "html-l2-q3",
+        "question": "What tag creates a numbered list?",
+        "options": [
+          "<ul>",
+          "<nl>",
+          "<ol>",
+          "<li>"
+        ],
+        "correctOptionIndex": 2,
+        "explanation": "<ol> stands for Ordered List, which creates numbered items."
+      }
+    ]
   },
-
-  'html-l3': {
-    id: 'html-l3',
-    courseSlug: 'html',
-    title: 'Document Head, Charset & Meta Tags',
-    duration: '14 min',
-    introduction:
-      'Behind every fast, mobile-friendly, and search-optimized webpage is a carefully configured <head> section. In this lesson, you will master character encodings (UTF-8), the crucial viewport meta tag for mobile responsiveness, social sharing tags (Open Graph), and SEO descriptions.',
-    learningObjectives: [
-      'Learn why <meta charset="UTF-8"> prevents character corruption for emojis and global alphabets',
-      'Master the meta viewport configuration for seamless mobile responsiveness',
-      'Write effective SEO description meta tags for search engine results snippets',
-      'Understand Open Graph and Twitter card meta tags for rich social media links',
+  "html-l3": {
+    "id": "html-l3",
+    "courseSlug": "html",
+    "title": "Forms, Inputs, and Buttons",
+    "duration": "1h",
+    "introduction": "Forms are how websites collect data from users. Whether it is a login page, a search bar, or a contact form, understanding HTML forms is essential for building interactive websites.",
+    "learningObjectives": [
+      "Create a basic form structure.",
+      "Use different types of input fields (text, email, password, radio, checkbox).",
+      "Connect labels to inputs for accessibility.",
+      "Create submit buttons."
     ],
-    explanation: [
+    "explanation": [
       {
-        heading: 'Character Encoding: UTF-8',
-        paragraphs: [
-          'Computers only understand zeros and ones. Character encoding translates human characters (letters, numbers, punctuation, emojis, and global alphabets like Arabic, Chinese, or Cyrillic) into binary byte sequences.',
-          'UTF-8 is the universal standard for the World Wide Web. By specifying <meta charset="UTF-8"> within the first 1024 bytes of your HTML document, you guarantee that text, accents, and symbols display correctly without visual corruption (called "mojibake").',
-        ],
+        "heading": "WHAT is an HTML Form?",
+        "paragraphs": [
+          "A form is an area of a webpage containing interactive controls (like text fields and checkboxes) for submitting information to a server."
+        ]
       },
       {
-        heading: 'The Responsive Viewport Meta Tag',
-        paragraphs: [
-          'Before smartphones, mobile browsers assumed every site was designed for a 980-pixel wide desktop screen and zoomed out tiny text to fit the phone display.',
-          'The tag <meta name="viewport" content="width=device-width, initial-scale=1.0"> instructs the mobile browser to match the viewport width to the device physical pixel width and set a 1:1 zoom ratio. Without this tag, responsive CSS media queries will not function as expected.',
-        ],
-        keyPoints: [
-          'width=device-width: Tells the browser to set page width to match screen width.',
-          'initial-scale=1.0: Sets the default initial zoom level when the page loads.',
-        ],
+        "heading": "WHY use labels?",
+        "paragraphs": [
+          "Labels (`<label>`) describe what an input is for. They are critical for accessibility, allowing screen readers to announce the input purpose. Clicking a label also focuses the associated input!"
+        ]
       },
+      {
+        "heading": "HOW to connect labels?",
+        "paragraphs": [
+          "You connect a `<label>` to an `<input>` by giving the input an `id` attribute, and giving the label a `for` attribute with the exact same value."
+        ]
+      },
+      {
+        "heading": "WHEN to use different inputs?",
+        "paragraphs": [
+          "Use `type=\"text\"` for names, `type=\"password\"` to hide characters, `type=\"radio\"` for selecting ONE option from many, and `type=\"checkbox\"` for selecting MULTIPLE options."
+        ]
+      }
     ],
-    codeExample: {
-      language: 'html',
-      filename: 'meta-tags.html',
-      code: `<head>
-  <!-- 1. Universal character encoding -->
-  <meta charset="UTF-8">
-
-  <!-- 2. Responsive viewport for mobile smartphones & tablets -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- 3. Primary Page Title and Search Meta Description -->
-  <title>Learn Web Architecture | CLOUD Platform</title>
-  <meta name="description" content="Interactive coding courses covering HTML, CSS, JavaScript, React, and Python with hands-on practice.">
-
-  <!-- 4. Open Graph Social Media Sharing Preview -->
-  <meta property="og:title" content="CLOUD - Modern Coding Platform">
-  <meta property="og:description" content="Master web architecture with hands-on lessons and quizzes.">
-  <meta property="og:image" content="https://example.com/banner.jpg">
-</head>`,
-      explanation:
-        'These tags configure the document for global text safety, mobile phone responsiveness, search engine snippets, and rich social media link previews on Twitter, WhatsApp, and LinkedIn.',
+    "codeExample": {
+      "language": "html",
+      "filename": "form.html",
+      "explanation": "A basic login form with labels, inputs, and a submit button.",
+      "code": "<form action=\"/submit\">\n  <label for=\"username\">Username:</label>\n  <input type=\"text\" id=\"username\" name=\"username\" required>\n  \n  <label for=\"pwd\">Password:</label>\n  <input type=\"password\" id=\"pwd\" name=\"pwd\" required>\n  \n  <button type=\"submit\">Login</button>\n</form>"
     },
-    practicalExample: {
-      title: 'Preparing a Link for Social Media & Google Search',
-      scenario:
-        'When you share a link on Slack, Discord, or Twitter, the app scrapes your <head> to display a beautiful card with a title, image, and snippet.',
-      code: `<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fresh Coffee Roasters - Artisanal Beans</title>
-  <meta name="description" content="Ethically sourced specialty single-origin coffee roasted fresh daily in small batches.">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Fresh Coffee Roasters">
-  <meta property="og:description" content="Discover our seasonal coffee beans with free shipping on all orders over $30.">
-</head>`,
-      explanation:
-        'Google uses the description meta tag to generate the two-line preview snippet beneath the link title in search results.',
-      outputDescription: 'Configures search engine listing snippets and chat application preview cards.',
+    "practicalExample": {
+      "title": "A Newsletter Signup",
+      "scenario": "You want users to subscribe to your weekly newsletter.",
+      "explanation": "We use type=\"email\" to ensure the browser validates that the user typed a real email address.",
+      "code": "<form>\n  <label for=\"email\">Subscribe to our Newsletter:</label>\n  <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"you@example.com\">\n  <button type=\"submit\">Subscribe</button>\n</form>"
     },
-    commonMistakes: [
+    "commonMistakes": [
       {
-        mistake: 'Omitting the viewport meta tag when building a responsive website',
-        whyItHappens: 'Developers assume CSS media queries alone will make a site responsive on mobile.',
-        howToFix: 'Always include <meta name="viewport" content="width=device-width, initial-scale=1.0"> in every project <head>.',
-        incorrectSnippet: `<head>
-  <title>My Mobile Site</title>
-</head>`,
-        correctSnippet: `<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Mobile Site</title>
-</head>`,
-      },
+        "mistake": "Not associating labels with inputs.",
+        "whyItHappens": "The form still looks fine visually without the `for` and `id` connection.",
+        "howToFix": "Always match the `for` attribute of the label to the `id` attribute of the input.",
+        "incorrectSnippet": "<label>Name:</label> <input type=\"text\">",
+        "correctSnippet": "<label for=\"name\">Name:</label> <input type=\"text\" id=\"name\">"
+      }
     ],
-    practice: {
-      title: 'Configure SEO & Responsive Metadata',
-      instructions: [
-        'Create a complete <head> block for an online bookstore.',
-        'Add the UTF-8 character encoding tag.',
-        'Add the responsive viewport meta tag.',
-        'Add a page title: "Chapter & Verse — Independent Bookstore".',
-        'Add a concise search engine description under 155 characters.',
+    "practice": {
+      "title": "Create a Contact Form",
+      "instructions": [
+        "Create a form element.",
+        "Add a text input for \"Name\" with a connected label.",
+        "Add a textarea for \"Message\" with a connected label.",
+        "Add a submit button."
       ],
-      starterCode: `<head>
-  <!-- Add your metadata here -->
-</head>`,
-      hint: 'Use meta charset, meta name="viewport", title, and meta name="description".',
-      solutionCode: `<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chapter & Verse — Independent Bookstore</title>
-  <meta name="description" content="Curated fiction, non-fiction, and poetry with same-day local delivery and community book club events.">
-</head>`,
+      "starterCode": "<!-- Build your form here -->",
+      "hint": "Use <label for=\"xyz\"> and <input id=\"xyz\">",
+      "solutionCode": "<form>\n  <label for=\"name\">Name:</label>\n  <input type=\"text\" id=\"name\">\n  \n  <label for=\"msg\">Message:</label>\n  <textarea id=\"msg\"></textarea>\n  \n  <button type=\"submit\">Send</button>\n</form>"
     },
-    projectConnection: {
-      title: 'Search Engine Optimization (SEO) & Marketing Growth',
-      description:
-        'High-ranking commercial websites optimize their <head> metadata meticulously. Without clear title and description meta tags, click-through rates from search results drop significantly.',
-      howItApplies:
-        'In e-commerce and SaaS products, every dynamic product page automatically generates unique meta titles and descriptions using database records to drive organic customer traffic.',
+    "projectConnection": {
+      "title": "Portfolio Project",
+      "description": "Adding a Contact Me section.",
+      "howItApplies": "You will build a fully functional contact form at the bottom of your portfolio so clients can reach out to you."
     },
-    quiz: [
+    "quiz": [
       {
-        id: 'html-l3-q1',
-        question: 'What is the consequence of omitting the viewport meta tag on mobile devices?',
-        options: [
-          'The mobile browser will fail to load the HTML file entirely.',
-          'The mobile browser will simulate a 980px desktop window and zoom out, shrinking all text.',
-          'All images will be permanently hidden by default.',
-          'JavaScript execution will be halted by the browser engine.',
+        "id": "html-l3-q1",
+        "question": "Which input type hides the characters being typed?",
+        "options": [
+          "text",
+          "hidden",
+          "password",
+          "secret"
         ],
-        correctOptionIndex: 1,
-        explanation:
-          'Without the viewport meta tag, mobile browsers default to a desktop virtual viewport (typically 980px) and zoom out, making elements tiny.',
+        "correctOptionIndex": 2,
+        "explanation": "type=\"password\" obscures the text (usually with dots or asterisks)."
       },
       {
-        id: 'html-l3-q2',
-        question: 'Which character encoding is the universal standard for modern web documents?',
-        options: ['ASCII', 'ISO-8859-1', 'UTF-8', 'Windows-1252'],
-        correctOptionIndex: 2,
-        explanation:
-          'UTF-8 supports virtually all world languages, symbols, and emojis, making it the universal standard on the modern web.',
-      },
-      {
-        id: 'html-l3-q3',
-        question: 'Where do Open Graph (og:title, og:image) meta tags belong in the document?',
-        options: [
-          'Inside the <footer> tag at the bottom of the page',
-          'Inside the <head> section of the document',
-          'Inside the <main> landmark',
-          'Directly inside external CSS files',
+        "id": "html-l3-q2",
+        "question": "How do you correctly link a <label> to an <input>?",
+        "options": [
+          "Place them next to each other",
+          "Using the label \"to\" and input \"name\" attributes",
+          "Using the label \"for\" and input \"id\" attributes",
+          "Using the label \"id\" and input \"for\" attributes"
         ],
-        correctOptionIndex: 1,
-        explanation:
-          'Open Graph metadata belongs exclusively in the <head> section so web scrapers and social preview bots can read it before rendering the page.',
+        "correctOptionIndex": 2,
+        "explanation": "The `for` attribute on the label must match the `id` attribute on the input."
       },
-    ],
+      {
+        "id": "html-l3-q3",
+        "question": "Which input type allows selecting MULTIPLE options?",
+        "options": [
+          "radio",
+          "checkbox",
+          "select",
+          "button"
+        ],
+        "correctOptionIndex": 1,
+        "explanation": "Checkboxes allow multiple selections, whereas radio buttons restrict to a single selection."
+      }
+    ]
   },
-
-  'html-l4': {
-    id: 'html-l4',
-    courseSlug: 'html',
-    title: 'Headings Hierarchy (h1 - h6) & Paragraphs',
-    duration: '14 min',
-    introduction:
-      'Visual layout is not just about aesthetics—it is about information hierarchy. In this lesson, you will learn how to structure documents using the six levels of HTML headings (<h1> through <h6>) and paragraphs (<p>), how search engines and screen readers parse your document outline, and why skipping heading levels is a critical accessibility defect.',
-    learningObjectives: [
-      'Master the semantic ranking of heading elements from <h1> (highest) to <h6> (lowest)',
-      'Learn why there should typically be only one <h1> per page',
-      'Understand how screen reader users navigate long documents via headings',
-      'Format running copy and line breaks with <p> and <br>',
+  "html-l4": {
+    "id": "html-l4",
+    "courseSlug": "html",
+    "title": "Semantic HTML & Accessibility",
+    "duration": "1h",
+    "introduction": "In the early days of the web, developers used <div> tags for everything. Today, we use Semantic HTML. Semantic tags clearly describe their meaning to both the browser and the developer, which is crucial for SEO and accessibility.",
+    "learningObjectives": [
+      "Understand what Semantic HTML is and why it matters.",
+      "Learn structural tags like header, nav, main, article, section, and footer.",
+      "Understand basic web accessibility (a11y) principles.",
+      "Replace meaningless divs with meaningful tags."
     ],
-    explanation: [
+    "explanation": [
       {
-        heading: 'The Heading Hierarchy Rules',
-        paragraphs: [
-          'HTML provides six levels of section headings: <h1>, <h2>, <h3>, <h4>, <h5>, and <h6>. <h1> represents the main topic of the entire document, <h2> represents major chapters or sections, and <h3> represents subsections within an <h2>.',
-          'Think of headings as creating an outline or table of contents for a book. Screen reader users often press a shortcut key (like "H") to jump from heading to heading to quickly skim a page.',
-        ],
-        keyPoints: [
-          'Never choose a heading level based on how big or small you want the text to look. Use CSS font-size for styling.',
-          'Do not skip heading levels (e.g., do not jump directly from <h1> to <h3> without an intervening <h2>).',
-          'A page should virtually always have exactly one <h1> identifying the primary subject of that view.',
-        ],
+        "heading": "WHAT is Semantic HTML?",
+        "paragraphs": [
+          "Semantic HTML introduces meaning to the web page rather than just presentation. A `<div>` tells you nothing about its content. A `<nav>` tells you exactly what it is: navigation."
+        ]
       },
       {
-        heading: 'Paragraphs & Text Flow',
-        paragraphs: [
-          'The <p> element represents a paragraph of text. Browsers automatically add vertical margin before and after paragraphs to create readable separation between blocks of copy.',
-          'If you need a simple line break within a single paragraph (such as in a physical postal address or a poem), use the void <br> element. Do not use <br> to create vertical spacing between separate thoughts—use distinct <p> tags or CSS margins instead.',
-        ],
+        "heading": "WHY does it matter?",
+        "paragraphs": [
+          "1. Accessibility: Screen readers use semantic tags to help visually impaired users navigate the page easily. 2. SEO: Search engines prioritize content inside semantic tags (like `<article>`) when ranking pages."
+        ]
       },
+      {
+        "heading": "HOW to use them?",
+        "paragraphs": [
+          "Think about the layout of a newspaper. The top logo is the `<header>`. The menu is `<nav>`. The primary story is `<main>`, containing an `<article>`. The bottom copyright is the `<footer>`."
+        ]
+      },
+      {
+        "heading": "WHEN to use div?",
+        "paragraphs": [
+          "Use `<div>` or `<span>` only when there is no appropriate semantic element, typically just for grouping elements together to apply CSS styling."
+        ]
+      }
     ],
-    codeExample: {
-      language: 'html',
-      filename: 'headings-outline.html',
-      code: `<!-- Main topic of the entire page (one h1) -->
-<h1>Web Development Comprehensive Guide</h1>
-
-<!-- Major Section 1 -->
-<h2>Frontend Technologies</h2>
-<p>Frontend development encompasses everything users interact with directly in the browser.</p>
-
-<!-- Subsection 1.1 -->
-<h3>Semantic HTML</h3>
-<p>HTML provides the structural skeleton of web applications.</p>
-
-<!-- Subsection 1.2 -->
-<h3>Cascading Style Sheets (CSS)</h3>
-<p>CSS controls visual aesthetics, typography, and responsive grid layouts.</p>
-
-<!-- Major Section 2 -->
-<h2>Backend Technologies</h2>
-<p>Backend systems handle persistent storage, APIs, and business logic.</p>`,
-      explanation:
-        'Notice the strict logical nesting: <h2> headings divide the main topic, and <h3> headings subdivide the <h2>. There is no skipping of levels.',
+    "codeExample": {
+      "language": "html",
+      "filename": "semantic.html",
+      "explanation": "A properly structured semantic webpage layout.",
+      "code": "<header>\n  <h1>My Blog</h1>\n  <nav>\n    <a href=\"/\">Home</a>\n    <a href=\"/about\">About</a>\n  </nav>\n</header>\n\n<main>\n  <article>\n    <h2>Why Semantic HTML is Great</h2>\n    <p>It makes the web better for everyone.</p>\n  </article>\n</main>\n\n<footer>\n  <p>&copy; 2023 My Blog</p>\n</footer>"
     },
-    practicalExample: {
-      title: 'Structuring a Tech Blog Article',
-      scenario:
-        'When publishing an article or news post, a clean heading outline ensures optimal Google indexing and accessibility compliance.',
-      code: `<article>
-  <h1>Understanding Asynchronous JavaScript</h1>
-  <p class="article-meta">Published on September 12 by Engineering Team</p>
-  
-  <h2>What is the Event Loop?</h2>
-  <p>JavaScript executes code synchronously on a single main thread...</p>
-
-  <h3>Microtasks vs Macrotasks</h3>
-  <p>Promises are queued in the microtask queue, giving them priority...</p>
-
-  <h2>Common Async Pitfalls</h2>
-  <p>Forgetting to await a promise can lead to unresolved promise rejections.</p>
-</article>`,
-      explanation:
-        'Search engine crawlers read this outline to understand the topics and subtopics discussed in the article.',
-      outputDescription: 'Renders a structured article with prominent titles and distinct hierarchical section markers.',
+    "practicalExample": {
+      "title": "Structuring a News Article",
+      "scenario": "You are writing the markup for a news website.",
+      "explanation": "The article itself is wrapped in `<article>`, its subsections in `<section>`, and the author bio in an `<aside>`.",
+      "code": "<article>\n  <h2>Local Sports Team Wins Championship</h2>\n  <section>\n    <h3>First Half</h3>\n    <p>The game started slow...</p>\n  </section>\n  <aside>\n    <p>Written by Jane Doe, Sports Reporter</p>\n  </aside>\n</article>"
     },
-    commonMistakes: [
+    "commonMistakes": [
       {
-        mistake: 'Using heading tags solely for visual font size (e.g. using <h4> just because you want small bold text)',
-        whyItHappens: 'Beginners associate <h6> with "small text" and <h1> with "large text".',
-        howToFix: 'Choose tags based on semantic document hierarchy. Change visual font sizes using CSS classes.',
-        incorrectSnippet: `<p>Welcome!</p>
-<h6>Click here to download our free guide</h6>`,
-        correctSnippet: `<p>Welcome!</p>
-<p class="text-sm font-bold">Click here to download our free guide</p>`,
-      },
-      {
-        mistake: 'Using multiple consecutive <br><br> tags to create spacing between paragraphs',
-        whyItHappens: 'Treating HTML like a word processor typewriter.',
-        howToFix: 'Wrap distinct blocks of text in separate <p> tags, and use CSS margin/padding for visual spacing.',
-        incorrectSnippet: `Hello World<br><br>This is the next thought<br><br>And another`,
-        correctSnippet: `<p>Hello World</p>
-<p>This is the next thought</p>
-<p>And another</p>`,
-      },
+        "mistake": "Using <div> for buttons or links.",
+        "whyItHappens": "Developers sometimes use a div and style it to look like a button.",
+        "howToFix": "Always use `<button>` for actions and `<a>` for navigation. Divs cannot be focused by the keyboard by default!",
+        "incorrectSnippet": "<div class=\"btn\">Submit</div>",
+        "correctSnippet": "<button type=\"submit\" class=\"btn\">Submit</button>"
+      }
     ],
-    practice: {
-      title: 'Create a Recipe Page Document Outline',
-      instructions: [
-        'Structure a recipe page with a logical heading hierarchy.',
-        'Use an <h1> for the recipe name: "Homemade Sourdough Bread".',
-        'Add an introductory paragraph describing the loaf.',
-        'Add an <h2> for "Ingredients" and an <h2> for "Step-by-Step Instructions".',
-        'Under instructions, add <h3> headings for "Preparing the Starter" and "Baking".',
+    "practice": {
+      "title": "Refactor to Semantic HTML",
+      "instructions": [
+        "Change the top div to a header.",
+        "Change the middle div to main.",
+        "Change the bottom div to footer."
       ],
-      starterCode: `<!-- Write your recipe outline below -->
-`,
-      hint: 'Ensure your hierarchy follows: h1 -> h2 -> h3 without skipping any levels.',
-      solutionCode: `<h1>Homemade Sourdough Bread</h1>
-<p>A crusty, golden loaf with a tender crumb and deep fermented flavor.</p>
-
-<h2>Ingredients</h2>
-<p>500g bread flour, 350g lukewarm water, 100g active sourdough starter, 10g fine sea salt.</p>
-
-<h2>Step-by-Step Instructions</h2>
-
-<h3>Preparing the Starter</h3>
-<p>Feed your starter 4-6 hours before mixing until it doubles in volume and passes the float test.</p>
-
-<h3>Baking</h3>
-<p>Preheat a Dutch oven to 450°F (230°C) and bake covered for 20 minutes, then uncovered for 20 minutes.</p>`,
+      "starterCode": "<div class=\"top\">\n  <h1>Welcome</h1>\n</div>\n<div class=\"content\">\n  <p>Main content here.</p>\n</div>\n<div class=\"bottom\">\n  <p>Copyright</p>\n</div>",
+      "hint": "Replace the words \"div\" with the correct semantic tag names.",
+      "solutionCode": "<header class=\"top\">\n  <h1>Welcome</h1>\n</header>\n<main class=\"content\">\n  <p>Main content here.</p>\n</main>\n<footer class=\"bottom\">\n  <p>Copyright</p>\n</footer>"
     },
-    projectConnection: {
-      title: 'Accessibility Compliance (WCAG 2.1) & Assistive Technology',
-      description:
-        'Screen readers used by visually impaired individuals rely heavily on heading navigation. In accessibility audits, skipped heading levels or pages lacking an <h1> represent immediate compliance violations.',
-      howItApplies:
-        'Enterprise products and government portals must pass accessibility audits (such as Section 508 / WCAG AA) to avoid legal liability and ensure inclusivity for all users.',
+    "projectConnection": {
+      "title": "Portfolio Project",
+      "description": "Building the core layout.",
+      "howItApplies": "Your entire portfolio will be wrapped in semantic tags, ensuring it ranks well on Google and is accessible to all users."
     },
-    quiz: [
+    "quiz": [
       {
-        id: 'html-l4-q1',
-        question: 'Why is it considered bad practice to jump directly from an <h1> to an <h3>?',
-        options: [
-          'Browsers will throw a syntax error and stop rendering the page.',
-          'It breaks the logical document outline for screen readers and search crawlers.',
-          'CSS stylesheets cannot apply fonts to skipped headings.',
-          'It increases the downloaded page weight significantly.',
+        "id": "html-l4-q1",
+        "question": "Which tag should wrap the primary content of the document?",
+        "options": [
+          "<section>",
+          "<content>",
+          "<main>",
+          "<body>"
         ],
-        correctOptionIndex: 1,
-        explanation:
-          'Skipping heading levels creates a broken document hierarchy for assistive technologies and search engine indexers.',
+        "correctOptionIndex": 2,
+        "explanation": "<main> represents the dominant content of the <body>."
       },
       {
-        id: 'html-l4-q2',
-        question: 'How many <h1> elements should typically exist on a standard web page?',
-        options: ['Exactly one per page to represent the primary document topic', 'As many as possible to boost SEO keywords', 'One for every paragraph', 'Zero, <h1> is deprecated in HTML5'],
-        correctOptionIndex: 0,
-        explanation:
-          'Best practice dictates one <h1> per page representing the overall subject of that specific document or page view.',
-      },
-      {
-        id: 'html-l4-q3',
-        question: 'When is it appropriate to use the <br> tag?',
-        options: [
-          'To create large vertical spacing between layout cards',
-          'For semantic line breaks where a new line is part of the content (like postal addresses or poems)',
-          'To reset CSS float properties',
-          'Between every single sentence on the page',
+        "id": "html-l4-q2",
+        "question": "Why is Semantic HTML important?",
+        "options": [
+          "It makes the website load faster",
+          "It is required for CSS to work",
+          "It improves Accessibility and SEO",
+          "It encrypts the data"
         ],
-        correctOptionIndex: 1,
-        explanation:
-          'The <br> tag is meant for meaningful line breaks within a single thought (addresses, poetry), not for layout margin spacing.',
+        "correctOptionIndex": 2,
+        "explanation": "Semantic tags provide meaning that helps screen readers and search engine crawlers."
       },
-    ],
+      {
+        "id": "html-l4-q3",
+        "question": "When should you use a <div>?",
+        "options": [
+          "For the main navigation",
+          "For the page footer",
+          "For independent articles",
+          "When no semantic tag is appropriate, usually for CSS grouping"
+        ],
+        "correctOptionIndex": 3,
+        "explanation": "Divs have no semantic meaning and should be used as a last resort for styling."
+      }
+    ]
   },
-
-  'html-l5': {
-    id: 'html-l5',
-    courseSlug: 'html',
-    title: 'Semantic vs Non-Semantic Elements',
-    duration: '15 min',
-    introduction:
-      'In early web development, pages were built using thousands of generic <div> and <span> tags with custom class names. HTML5 revolutionized web architecture by introducing semantic elements—tags that clearly describe their meaning to both the browser and the developer.',
-    learningObjectives: [
-      'Differentiate between semantic elements (<article>, <nav>) and non-semantic containers (<div>, <span>)',
-      'Learn how semantic markup improves screen reader accessibility and keyboard navigation',
-      'Understand the SEO advantages of semantic HTML for search engine indexing',
-      'Identify when it is still acceptable to use generic <div> and <span> containers',
+  "html-l5": {
+    "id": "html-l5",
+    "courseSlug": "html",
+    "title": "Multimedia, Meta Tags & SEO",
+    "duration": "1h",
+    "introduction": "In our final HTML lesson, we will explore advanced features: embedding audio and video directly into your pages, and using meta tags to communicate directly with search engines and social media platforms.",
+    "learningObjectives": [
+      "Embed audio and video files using HTML5 tags.",
+      "Embed external content like YouTube videos using iframes.",
+      "Understand the <head> section and Meta tags.",
+      "Configure basic SEO and viewport settings."
     ],
-    explanation: [
+    "explanation": [
       {
-        heading: 'What Makes an Element Semantic?',
-        paragraphs: [
-          'A semantic element carries inherent meaning about the content it holds. For example, when a browser or screen reader encounters a <nav> element, it immediately knows that the enclosed links are for website navigation.',
-          'In contrast, a <div> or <span> carries zero semantic meaning. A <div> is simply a generic block container, and a <span> is a generic inline wrapper, both used strictly for styling or grouping when no semantic tag fits.',
-        ],
-        keyPoints: [
-          'Semantic: <header>, <nav>, <main>, <article>, <section>, <aside>, <footer>, <time>, <figure>.',
-          'Non-semantic: <div> (block-level styling wrapper), <span> (inline styling wrapper).',
-        ],
+        "heading": "WHAT are Multimedia and Meta Tags?",
+        "paragraphs": [
+          "Multimedia tags (`<audio>`, `<video>`) allow playing media natively in the browser without plugins. Meta tags provide metadata (data about data) to the browser and search engines."
+        ]
       },
       {
-        heading: 'The "Div Soup" Anti-Pattern',
-        paragraphs: [
-          'Before HTML5, websites were plagued by "div soup"—deeply nested <div> tags with endless classes like <div class="header"><div class="nav-container"><div class="menu">.',
-          'Modern best practices replace these generic wrappers with clear structural landmarks, making the codebase significantly easier to read, maintain, and test.',
-        ],
+        "heading": "WHY use Meta tags?",
+        "paragraphs": [
+          "When you share a link on iMessage or Twitter, the image, title, and description that pop up are generated by Meta tags! They also tell Google what your page is about."
+        ]
       },
+      {
+        "heading": "HOW to embed media?",
+        "paragraphs": [
+          "The `<video>` tag works similarly to `<img>`, but you should include the `controls` attribute so the user can play, pause, and adjust volume."
+        ]
+      },
+      {
+        "heading": "WHEN to use an iframe?",
+        "paragraphs": [
+          "Use an `<iframe>` when you want to embed an entire other webpage or service inside yours, such as a YouTube video player or a Google Map."
+        ]
+      }
     ],
-    codeExample: {
-      language: 'html',
-      filename: 'semantic-vs-divs.html',
-      code: `<!-- ❌ Legacy "Div Soup" (Non-Semantic) -->
-<div class="header">
-  <div class="logo">My App</div>
-  <div class="nav-menu">
-    <a href="/">Home</a>
-    <a href="/pricing">Pricing</a>
-  </div>
-</div>
-
-<!-- ✅ Modern Semantic HTML5 Structure -->
-<header>
-  <div class="logo">My App</div>
-  <nav aria-label="Main Navigation">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/pricing">Pricing</a></li>
-    </ul>
-  </nav>
-</header>`,
-      explanation:
-        'The semantic version communicates structural zones directly to assistive technologies without relying on CSS class names.',
+    "codeExample": {
+      "language": "html",
+      "filename": "advanced.html",
+      "explanation": "Embedding a video and setting up meta tags.",
+      "code": "<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <meta name=\"description\" content=\"Learn HTML advanced features.\">\n    <title>Advanced HTML</title>\n  </head>\n  <body>\n    <h2>Watch this tutorial</h2>\n    <video src=\"tutorial.mp4\" controls width=\"500\"></video>\n  </body>\n</html>"
     },
-    practicalExample: {
-      title: 'Structuring a Blog Post with Semantic Tags',
-      scenario: 'A standalone blog post with publication date, author details, and related side notes.',
-      code: `<article>
-  <header>
-    <h2>Building Accessible Web Applications</h2>
-    <p>By Sarah Chen on <time datetime="2026-09-12">September 12, 2026</time></p>
-  </header>
-  
-  <p>Semantic markup forms the foundation of digital accessibility...</p>
-  
-  <aside>
-    <h4>Pro Tip</h4>
-    <p>Always audit your HTML with automated accessibility checkers like Axe.</p>
-  </aside>
-</article>`,
-      explanation:
-        'The <time> tag with the datetime attribute allows machines (calendars, search engines) to parse the date format reliably.',
-      outputDescription: 'Renders an article with clean metadata and a distinct side tip.',
+    "practicalExample": {
+      "title": "Embedding a YouTube Video",
+      "scenario": "You want to feature a YouTube video on your blog.",
+      "explanation": "Instead of hosting the heavy video yourself, you use the iframe code provided by YouTube.",
+      "code": "<iframe width=\"560\" height=\"315\" \n  src=\"https://www.youtube.com/embed/dQw4w9WgXcQ\" \n  title=\"YouTube video player\" \n  frameborder=\"0\" \n  allow=\"accelerometer; autoplay; encrypted-media\" \n  allowfullscreen>\n</iframe>"
     },
-    commonMistakes: [
+    "commonMistakes": [
       {
-        mistake: 'Using <div> tags for clickable interactive buttons instead of <button>',
-        whyItHappens: 'Developers style a <div> to look like a button with CSS and attach a JavaScript click listener.',
-        howToFix: 'Always use native <button> elements. Native buttons support keyboard focus (Tab) and activation (Enter/Space) automatically.',
-        incorrectSnippet: `<div class="btn" onclick="submitForm()">Submit</div>`,
-        correctSnippet: `<button type="button" class="btn" onclick="submitForm()">Submit</button>`,
-      },
+        "mistake": "Forgetting the viewport meta tag.",
+        "whyItHappens": "The page looks fine on a laptop, but tiny and broken on a mobile phone.",
+        "howToFix": "ALWAYS include `<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">` in the `<head>` of every project.",
+        "incorrectSnippet": "<head><title>My Site</title></head>",
+        "correctSnippet": "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>My Site</title></head>"
+      }
     ],
-    practice: {
-      title: 'Refactor Div Soup to Semantic HTML',
-      instructions: [
-        'Take a non-semantic news card layout and convert the wrappers into semantic elements.',
-        'Replace the outer div with an <article>.',
-        'Use <header> for the news headline and timestamp.',
-        'Use <time> for the date string.',
+    "practice": {
+      "title": "Add an Audio Player",
+      "instructions": [
+        "Add an audio element.",
+        "Set the source to \"song.mp3\".",
+        "Ensure the user has play/pause controls."
       ],
-      starterCode: `<div class="news-card">
-  <div class="card-top">
-    <h3>New Mars Rover Landing</h3>
-    <span class="date">October 14, 2026</span>
-  </div>
-  <p>NASA confirms successful touchdown in the crater.</p>
-</div>`,
-      hint: 'Use <article>, <header>, <h3>, <time datetime="...">, and <p>.',
-      solutionCode: `<article class="news-card">
-  <header>
-    <h3>New Mars Rover Landing</h3>
-    <p><time datetime="2026-10-14">October 14, 2026</time></p>
-  </header>
-  <p>NASA confirms successful touchdown in the crater.</p>
-</article>`,
+      "starterCode": "<!-- Add audio player here -->",
+      "hint": "Use the <audio> tag with the \"controls\" attribute.",
+      "solutionCode": "<audio src=\"song.mp3\" controls></audio>"
     },
-    projectConnection: {
-      title: 'Search Engine Crawlers & Screen Reader Landmarks',
-      description:
-        'Google uses semantic elements to generate rich snippets and understand content relationships. Screen readers provide navigation hotkeys specifically to jump between landmarks (<header>, <nav>, <main>, <footer>).',
-      howItApplies:
-        'When creating production dashboards or e-commerce products, semantic markup ensures high accessibility ratings on Google Lighthouse (100% score).',
+    "projectConnection": {
+      "title": "Portfolio Project",
+      "description": "Final Polish.",
+      "howItApplies": "You will add meta descriptions so your portfolio looks professional when you share the link with recruiters on LinkedIn."
     },
-    quiz: [
+    "quiz": [
       {
-        id: 'html-l5-q1',
-        question: 'Which of the following elements is purely non-semantic?',
-        options: ['<article>', '<nav>', '<div>', '<header>'],
-        correctOptionIndex: 2,
-        explanation:
-          '<div> is a generic block-level container that provides no semantic information about its contents.',
-      },
-      {
-        id: 'html-l5-q2',
-        question: 'Why should you use <button> instead of <div onclick="..."> for clickable actions?',
-        options: [
-          '<button> elements are automatically keyboard-accessible (Tab and Enter) and communicate their role to screen readers.',
-          '<div> elements cannot accept CSS styling.',
-          '<button> elements execute faster in the JavaScript runtime.',
-          'Browsers block all JavaScript on <div> tags.',
+        "id": "html-l5-q1",
+        "question": "Which attribute is required to show play/pause buttons on a <video>?",
+        "options": [
+          "autoplay",
+          "buttons",
+          "controls",
+          "src"
         ],
-        correctOptionIndex: 0,
-        explanation:
-          'Native <button> elements come with built-in keyboard accessibility, focus management, and accessibility tree roles.',
+        "correctOptionIndex": 2,
+        "explanation": "The `controls` attribute tells the browser to display the media controls."
       },
       {
-        id: 'html-l5-q3',
-        question: 'What is the purpose of the <time> element?',
-        options: [
-          'To start a live countdown timer in the browser',
-          'To represent human-readable dates and machine-readable datetime attributes for machines and search engines',
-          'To record the user current timezone via GPS',
-          'To enforce a timeout on long HTTP requests',
+        "id": "html-l5-q2",
+        "question": "Where must <meta> tags be placed in an HTML document?",
+        "options": [
+          "Inside the <body>",
+          "Inside the <head>",
+          "Outside the <html> tag",
+          "Inside the <footer>"
         ],
-        correctOptionIndex: 1,
-        explanation:
-          'The <time> element provides human-readable text along with an ISO 8601 formatted datetime attribute for automated tools.',
+        "correctOptionIndex": 1,
+        "explanation": "Meta tags are metadata and must go inside the <head> element."
       },
-    ],
-  },
-
-  'html-l6': {
-    id: 'html-l6',
-    courseSlug: 'html',
-    title: 'Core Landmarks: Header, Nav, Main & Footer',
-    duration: '18 min',
-    introduction:
-      'Every web page is composed of distinct functional zones. In this lesson, you will master the four primary structural landmarks of the web: <header>, <nav>, <main>, and <footer>. You will learn how these landmarks divide a document and why there can only be one visible <main> element per page.',
-    learningObjectives: [
-      'Master the four primary HTML page landmarks: <header>, <nav>, <main>, and <footer>',
-      'Learn the strict rule: exactly one visible <main> landmark per document',
-      'Understand how <header> and <footer> can exist at both the page level and inside <article> elements',
-      'Construct a standard modern layout skeleton without generic wrapper divs',
-    ],
-    explanation: [
       {
-        heading: 'The Four Page Landmarks',
-        paragraphs: [
-          'Landmarks allow assistive technologies to instantly navigate to specific regions of a page without forcing the user to listen to all preceding content.',
-          '<header>: Represents introductory content, typically holding brand logos, search bars, and global navigation. It can be used at the page level or inside an <article>.',
-          '<nav>: Encapsulates major navigational links. Not all links belong in a <nav>—only primary navigation blocks (menus, breadcrumbs, pagination).',
-          '<main>: Contains the dominant, unique content of the document. Crucially, content that repeats across multiple pages (like headers, sidebars, search bars, and copyright notices) must NOT be inside <main>.',
-          '<footer>: Contains footer notes, copyright notices, terms of service links, privacy policies, and author credits.',
+        "id": "html-l5-q3",
+        "question": "Which tag is used to embed another webpage, like a YouTube player?",
+        "options": [
+          "<embed>",
+          "<object>",
+          "<video>",
+          "<iframe>"
         ],
-      },
-    ],
-    codeExample: {
-      language: 'html',
-      filename: 'page-landmarks.html',
-      code: `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>SaaS Dashboard</title>
-  </head>
-  <body>
-    <!-- Top Global Header -->
-    <header>
-      <a href="/" class="brand-logo">CLOUD</a>
-      <nav aria-label="Main Menu">
-        <ul>
-          <li><a href="/courses">Courses</a></li>
-          <li><a href="/pricing">Pricing</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <!-- Unique Primary Content -->
-    <main>
-      <h1>Student Dashboard</h1>
-      <p>Welcome back! You have completed 12 lessons this week.</p>
-    </main>
-
-    <!-- Global Footer -->
-    <footer>
-      <p>&copy; 2026 CLOUD Learning Platform. All rights reserved.</p>
-      <nav aria-label="Footer Legal Links">
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/terms">Terms of Service</a>
-      </nav>
-    </footer>
-  </body>
-</html>`,
-      explanation:
-        'Notice how <main> contains only the unique content for this specific page, while <header> and <footer> handle shared site-wide zones.',
-    },
-    practicalExample: {
-      title: 'A Clean Portfolio Layout Skeleton',
-      scenario: 'Setting up a professional developer portfolio with clear landmark regions.',
-      code: `<body>
-  <header>
-    <h2>DevPortfolio</h2>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <p>Full-stack developer specializing in React and TypeScript.</p>
-    </section>
-    
-    <section id="projects">
-      <h2>Featured Work</h2>
-      <p>Interactive web applications built for speed and reliability.</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>Designed with care. Connect on GitHub and LinkedIn.</p>
-  </footer>
-</body>`,
-      explanation:
-        'Assistive technologies can press key commands to jump directly to <main> and bypass repeated header links.',
-      outputDescription: 'A clean 3-part layout: top navigation bar, central content area, and bottom copyright footer.',
-    },
-    commonMistakes: [
-      {
-        mistake: 'Placing the site-wide global navigation bar inside the <main> element',
-        whyItHappens: 'Wrapping the entire body contents inside <main> out of habit.',
-        howToFix: '<main> must only contain content unique to that page. Global navigation belongs in <header> outside of <main>.',
-        incorrectSnippet: `<main>
-  <header><nav>...</nav></header>
-  <h1>Page Title</h1>
-</main>`,
-        correctSnippet: `<header><nav>...</nav></header>
-<main>
-  <h1>Page Title</h1>
-</main>`,
-      },
-    ],
-    practice: {
-      title: 'Assemble a Landmark Layout',
-      instructions: [
-        'Build a semantic HTML page body with all 4 major landmarks.',
-        'Add a <header> with a website name and navigation link.',
-        'Add a <main> with a page heading (<h1>) and a brief description.',
-        'Add a <footer> with a copyright statement.',
-      ],
-      starterCode: `<body>
-  <!-- Insert header, main, and footer landmarks here -->
-</body>`,
-      hint: 'Do not put the header or footer inside the main tag.',
-      solutionCode: `<body>
-  <header>
-    <h1>TechDaily News</h1>
-    <nav>
-      <a href="/world">World</a>
-      <a href="/tech">Tech</a>
-    </nav>
-  </header>
-
-  <main>
-    <h2>Today's Top Story</h2>
-    <p>Breakthrough in renewable solar cell efficiency announced today.</p>
-  </main>
-
-  <footer>
-    <p>&copy; 2026 TechDaily Inc.</p>
-  </footer>
-</body>`,
-    },
-    projectConnection: {
-      title: 'Skip-to-Content Links & Assistive Technology',
-      description:
-        'Keyboard-only users frequently use "Skip to main content" links that point directly to <main id="main-content">. Having a proper <main> landmark is required by federal accessibility standards.',
-      howItApplies:
-        'Large applications (like GitHub or Wikipedia) have dozens of navigation links at the top; the <main> landmark saves users from tabbing through 50 links on every page change.',
-    },
-    quiz: [
-      {
-        id: 'html-l6-q1',
-        question: 'What content belongs inside the <main> element?',
-        options: [
-          'The unique, primary content of the specific document, excluding repeated headers and footers',
-          'The entire visible <body> including global navigation and site-wide copyright',
-          'Only interactive JavaScript forms',
-          'Metadata and external stylesheet links',
-        ],
-        correctOptionIndex: 0,
-        explanation:
-          '<main> is dedicated exclusively to the central, unique content of the page. Repeating global headers and footers belong outside.',
-      },
-      {
-        id: 'html-l6-q2',
-        question: 'Can a document contain multiple <header> elements?',
-        options: [
-          'No, HTML strictly allows only one <header> per document.',
-          'Yes, you can have a page-level <header> as well as <header> elements inside <article> or <section> elements.',
-          'Only if the document is rendered on a mobile device.',
-          'Only if written in PHP.',
-        ],
-        correctOptionIndex: 1,
-        explanation:
-          'A page can have a top-level global <header> and also use <header> elements to introduce standalone <article> or <section> blocks.',
-      },
-      {
-        id: 'html-l6-q3',
-        question: 'Why is wrapping navigation links in a <nav> element beneficial?',
-        options: [
-          'It automatically styles the links with blue buttons.',
-          'Screen readers identify the region as a navigation landmark so users can quickly find or skip navigation.',
-          'It prevents the browser from caching link URLs.',
-          'It activates encrypted HTTPS sockets.',
-        ],
-        correctOptionIndex: 1,
-        explanation:
-          '<nav> creates an accessible landmark that assistive technologies can immediately locate or bypass.',
-      },
-    ],
-  },
+        "correctOptionIndex": 3,
+        "explanation": "An <iframe> (Inline Frame) is used to embed another document within the current HTML document."
+      }
+    ]
+  }
 };
-

@@ -1,342 +1,572 @@
-import { LessonDetail } from '../../types';
+import { LessonDetail } from '../types';
 
 export const JAVASCRIPT_LESSONS: Record<string, LessonDetail> = {
-  'js-l1': {
-    id: 'js-l1',
-    courseSlug: 'javascript',
-    title: 'Introduction to JavaScript, Engines & Runtime',
-    duration: '15 min',
-    introduction:
-      'JavaScript is the world most widely deployed programming language, powering the interactive web, server backends (Node.js), and mobile applications. In this lesson, you will discover how JavaScript engines (like Google Chrome V8) execute code using the Call Stack, Memory Heap, and Just-In-Time (JIT) compilation.',
-    learningObjectives: [
-      'Understand the role of JavaScript alongside HTML and CSS in modern web applications',
-      'Learn how the V8 engine parses, compiles, and executes JavaScript code',
-      'Understand the Single-Threaded nature of JavaScript and the Call Stack execution model',
-      'Differentiate between ECMAScript language specifications and Web Browser APIs',
+  "js-l1": {
+    "id": "js-l1",
+    "courseSlug": "javascript",
+    "title": "Variables, Data Types, and Output",
+    "duration": "1h",
+    "introduction": "Welcome to JavaScript, the programming language of the web! While HTML provides structure and CSS provides style, JavaScript provides logic and interactivity. We begin by learning how to store information and print it out.",
+    "learningObjectives": [
+      "Understand what variables are and how to declare them.",
+      "Learn the difference between let and const.",
+      "Identify basic data types (strings, numbers, booleans).",
+      "Use console.log to output data."
     ],
-    explanation: [
+    "explanation": [
       {
-        heading: 'What is JavaScript?',
-        paragraphs: [
-          'While HTML provides structural skeleton and CSS provides visual presentation, JavaScript provides behavior, logic, and state. JavaScript allows web pages to react to user clicks, validate form inputs, animate elements, and load data asynchronously from servers without page reloads.',
-          'JavaScript is an interpreted, high-level, single-threaded, garbage-collected language with first-class functions and prototype-based object orientation.',
-        ],
+        "heading": "WHAT is a Variable?",
+        "paragraphs": [
+          "A variable is like a named box in your computer's memory where you can store data. You give the box a name, put something inside it, and can look inside the box later."
+        ]
       },
       {
-        heading: 'The JavaScript Engine: Call Stack & Heap',
-        paragraphs: [
-          'Modern browsers run JavaScript inside specialized execution engines (such as Chrome V8, Safari JavaScriptCore, or Firefox SpiderMonkey).',
-          '• Memory Heap: An unstructured memory pool where objects, arrays, and variables are allocated in RAM.',
-          '• Call Stack: A Last-In, First-Out (LIFO) stack of execution frames tracking which function is currently executing.',
-          'Because JavaScript has only one Call Stack, it executes one line of code at a time synchronously on the main thread.',
-        ],
-        keyPoints: [
-          'ECMAScript (ES6, ES2024) is the official language standard.',
-          'Browser APIs (like window, document, fetch, setTimeout) are provided by the browser environment, not the core JS language itself.',
-        ],
+        "heading": "WHY use let vs const?",
+        "paragraphs": [
+          "In modern JS, we use `const` for values that will NEVER change (constant). We use `let` for values that might change later. We no longer use `var`."
+        ]
       },
+      {
+        "heading": "HOW to check output?",
+        "paragraphs": [
+          "Since JavaScript runs in the browser, we use `console.log()` to print messages to the Developer Tools Console. This is how programmers check if their code is working."
+        ]
+      },
+      {
+        "heading": "WHEN to use different data types?",
+        "paragraphs": [
+          "Use Strings (text wrapped in quotes) for names and messages. Use Numbers (no quotes) for math. Use Booleans (`true` or `false`) for yes/no states."
+        ]
+      }
     ],
-    codeExample: {
-      language: 'javascript',
-      filename: 'runtime-basics.js',
-      code: `// Synchronous execution on the single-threaded Call Stack
-function greetUser(name) {
-  const message = \`Hello, \${name}!\`;
-  return message;
-}
-
-function processOrder(orderId, customerName) {
-  console.log(\`Processing order #\${orderId}...\`);
-  const greeting = greetUser(customerName); // Pushes greetUser onto stack
-  console.log(greeting);
-  return { orderId, status: 'confirmed' };
-}
-
-const order = processOrder(1042, 'Alex');
-console.log('Order status:', order.status);`,
-      explanation:
-        'When processOrder is called, its frame is pushed to the Call Stack. Inside it, greetUser is pushed on top, executes, returns, pops off the stack, and then processOrder finishes.',
+    "codeExample": {
+      "language": "javascript",
+      "filename": "variables.js",
+      "explanation": "Declaring variables and printing them to the console.",
+      "code": "// A constant variable (cannot be reassigned)\nconst playerName = \"Alice\";\n\n// A variable that can change\nlet score = 0;\n\n// A boolean (true or false)\nlet isGameOver = false;\n\nconsole.log(playerName); // Prints: Alice\nconsole.log(score);      // Prints: 0\n\n// Changing the score later\nscore = 10;"
     },
-    practicalExample: {
-      title: 'Inspecting the JavaScript Console & Stack Trace',
-      scenario: 'Debugging an error to see how the engine displays the call stack trace.',
-      code: `function validateEmail(email) {
-  if (!email.includes('@')) {
-    throw new Error('Invalid email format: missing @ symbol');
+    "practicalExample": {
+      "title": "A Simple Shopping Cart Total",
+      "scenario": "You need to calculate the total price of items with tax.",
+      "explanation": "We store the price and tax rate in variables, perform math using the `*` and `+` operators, and log the result.",
+      "code": "const itemPrice = 50;\nconst taxRate = 0.10; // 10%\n\nlet taxAmount = itemPrice * taxRate;\nlet finalTotal = itemPrice + taxAmount;\n\nconsole.log(\"Your total is: \" + finalTotal);"
+    },
+    "commonMistakes": [
+      {
+        "mistake": "Trying to change a const variable.",
+        "whyItHappens": "Beginners use const for everything, then try to update it.",
+        "howToFix": "If you expect the value to change (like a score or a counter), you must declare it with `let`.",
+        "incorrectSnippet": "const score = 10;\nscore = 20; // Error!",
+        "correctSnippet": "let score = 10;\nscore = 20; // Works!"
+      }
+    ],
+    "practice": {
+      "title": "Declare Your Details",
+      "instructions": [
+        "Declare a const variable for your name.",
+        "Declare a let variable for your age.",
+        "Log both to the console."
+      ],
+      "starterCode": "// Write your code below\n\n",
+      "hint": "Use const for name, let for age, and console.log().",
+      "solutionCode": "const myName = \"Sarah\";\nlet myAge = 25;\nconsole.log(myName);\nconsole.log(myAge);"
+    },
+    "projectConnection": {
+      "title": "Interactive Quiz Project",
+      "description": "Keeping track of user data.",
+      "howItApplies": "You will use variables to keep track of the user's current score and their name as they play your game."
+    },
+    "quiz": [
+      {
+        "id": "js-l1-q1",
+        "question": "Which keyword should you use for a variable that will NOT change?",
+        "options": [
+          "let",
+          "var",
+          "const",
+          "static"
+        ],
+        "correctOptionIndex": 2,
+        "explanation": "`const` stands for constant, meaning it cannot be reassigned."
+      },
+      {
+        "id": "js-l1-q2",
+        "question": "What is the correct way to print \"Hello\" to the developer console?",
+        "options": [
+          "print(\"Hello\");",
+          "console.log(\"Hello\");",
+          "document.write(\"Hello\");",
+          "echo \"Hello\";"
+        ],
+        "correctOptionIndex": 1,
+        "explanation": "`console.log()` is the standard way to print output in JS."
+      },
+      {
+        "id": "js-l1-q3",
+        "question": "Which of the following is a Boolean data type?",
+        "options": [
+          "\"true\"",
+          "1",
+          "true",
+          "\"yes\""
+        ],
+        "correctOptionIndex": 2,
+        "explanation": "`true` (without quotes) is a boolean. `\"true\"` (with quotes) is a string."
+      }
+    ]
+  },
+  "js-l2": {
+    "id": "js-l2",
+    "courseSlug": "javascript",
+    "title": "Conditionals and Loops",
+    "duration": "1h",
+    "introduction": "Programs need to make decisions and repeat tasks. In this lesson, we learn how to control the flow of our JavaScript using if/else statements and loops.",
+    "learningObjectives": [
+      "Write if/else statements to execute code conditionally.",
+      "Use comparison operators (===, >, <, !==).",
+      "Write a for loop to repeat an action a specific number of times.",
+      "Write a while loop to repeat an action until a condition is false."
+    ],
+    "explanation": [
+      {
+        "heading": "WHAT are Conditionals?",
+        "paragraphs": [
+          "Conditionals (`if`, `else if`, `else`) allow your code to ask questions. \"If the user is logged in, show the dashboard. Else, show the login screen.\""
+        ]
+      },
+      {
+        "heading": "WHY use Loops?",
+        "paragraphs": [
+          "Computers are great at doing boring things very fast. If you need to print 100 numbers, you do not write `console.log()` 100 times; you write a loop that runs 100 times."
+        ]
+      },
+      {
+        "heading": "HOW to compare values?",
+        "paragraphs": [
+          "Use `===` to check if two things are exactly equal. (Never use `==`, it causes weird bugs). Use `>` for greater than, and `<` for less than."
+        ]
+      },
+      {
+        "heading": "WHEN to use for vs while?",
+        "paragraphs": [
+          "Use a `for` loop when you know exactly how many times you want to repeat (e.g., \"count to 10\"). Use a `while` loop when you want to repeat until something happens (e.g., \"keep asking until the user types the correct password\")."
+        ]
+      }
+    ],
+    "codeExample": {
+      "language": "javascript",
+      "filename": "logic.js",
+      "explanation": "An if/else statement and a simple for loop.",
+      "code": "const userAge = 18;\n\n// Conditional\nif (userAge >= 18) {\n  console.log(\"You can vote!\");\n} else {\n  console.log(\"You are too young to vote.\");\n}\n\n// For Loop: Count from 1 to 5\n// (start; condition; step)\nfor (let i = 1; i <= 5; i++) {\n  console.log(\"Number: \" + i);\n}"
+    },
+    "practicalExample": {
+      "title": "Checking a Password",
+      "scenario": "You want to check if a provided password is correct and long enough.",
+      "explanation": "We combine conditions using `&&` (AND). Both sides must be true for the code block to run.",
+      "code": "const password = \"secret123\";\n\nif (password === \"secret123\" && password.length >= 8) {\n  console.log(\"Access Granted!\");\n} else {\n  console.log(\"Access Denied!\");\n}"
+    },
+    "commonMistakes": [
+      {
+        "mistake": "Using = instead of === in an if statement.",
+        "whyItHappens": "In math, `=` means equals. In JS, `=` means assignment (give this variable a value).",
+        "howToFix": "Always use `===` (triple equals) when comparing two values in an `if` statement.",
+        "incorrectSnippet": "if (age = 18) { ... }",
+        "correctSnippet": "if (age === 18) { ... }"
+      }
+    ],
+    "practice": {
+      "title": "Write a Countdown Loop",
+      "instructions": [
+        "Write a for loop that starts at 5 and counts down to 1.",
+        "Inside the loop, console.log the number.",
+        "After the loop, console.log \"Blastoff!\"."
+      ],
+      "starterCode": "// Write your loop here\n\n",
+      "hint": "Your loop should start with `let i = 5`, condition `i >= 1`, and step `i--`.",
+      "solutionCode": "for (let i = 5; i >= 1; i--) {\n  console.log(i);\n}\nconsole.log(\"Blastoff!\");"
+    },
+    "projectConnection": {
+      "title": "Interactive Quiz Project",
+      "description": "Checking answers.",
+      "howItApplies": "You will use an `if` statement to check if the user clicked the correct answer, and increase their score if they did."
+    },
+    "quiz": [
+      {
+        "id": "js-l2-q1",
+        "question": "Which operator means \"strictly equal to\"?",
+        "options": [
+          "=",
+          "==",
+          "===",
+          "!=="
+        ],
+        "correctOptionIndex": 2,
+        "explanation": "`===` checks if both the value and the type are exactly equal."
+      },
+      {
+        "id": "js-l2-q2",
+        "question": "How do you check if BOTH condition A and condition B are true?",
+        "options": [
+          "A || B",
+          "A && B",
+          "A + B",
+          "A == B"
+        ],
+        "correctOptionIndex": 1,
+        "explanation": "`&&` is the logical AND operator."
+      },
+      {
+        "id": "js-l2-q3",
+        "question": "In `for (let i = 0; i < 5; i++)`, what does `i++` do?",
+        "options": [
+          "Multiplies i by 2",
+          "Adds 1 to i",
+          "Subtracts 1 from i",
+          "Stops the loop"
+        ],
+        "correctOptionIndex": 1,
+        "explanation": "`i++` is shorthand for `i = i + 1`."
+      }
+    ]
+  },
+  "js-l3": {
+    "id": "js-l3",
+    "courseSlug": "javascript",
+    "title": "Functions, Arrays, and Objects",
+    "duration": "1h",
+    "introduction": "As programs grow, writing everything in one big list gets messy. We need to group code into Functions, and group data into Arrays and Objects.",
+    "learningObjectives": [
+      "Define and call functions with parameters and return values.",
+      "Store lists of data in Arrays and access them by index.",
+      "Store complex data in Objects using key-value pairs.",
+      "Combine arrays and objects."
+    ],
+    "explanation": [
+      {
+        "heading": "WHAT are Functions, Arrays, and Objects?",
+        "paragraphs": [
+          "Functions are reusable blocks of code. Arrays are ordered lists of data. Objects are collections of related data labeled with keys."
+        ]
+      },
+      {
+        "heading": "WHY group data?",
+        "paragraphs": [
+          "If you have 100 users, you don't want 100 variables. You want ONE array containing 100 objects. If you need to calculate tax in 5 different places, you write ONE function and reuse it."
+        ]
+      },
+      {
+        "heading": "HOW to use Arrays?",
+        "paragraphs": [
+          "Arrays use square brackets `[]`. You access items using their index, which starts at `0`. So `myArray[0]` gets the first item."
+        ]
+      },
+      {
+        "heading": "WHEN to use Objects?",
+        "paragraphs": [
+          "Use Objects (curly braces `{}`) when data has specific properties. Instead of an array `[\"Alice\", 25, true]`, use an object `{ name: \"Alice\", age: 25, isAdmin: true }` so the data is labeled."
+        ]
+      }
+    ],
+    "codeExample": {
+      "language": "javascript",
+      "filename": "data.js",
+      "explanation": "A function that takes an object and an array.",
+      "code": "// An Array\nconst colors = [\"red\", \"green\", \"blue\"];\nconsole.log(colors[0]); // Prints: red\n\n// An Object\nconst user = {\n  name: \"Alice\",\n  age: 25\n};\nconsole.log(user.name); // Prints: Alice\n\n// A Function\nfunction greet(personName) {\n  return \"Hello, \" + personName;\n}\n\n// Calling the function\nlet message = greet(user.name);\nconsole.log(message); // Prints: Hello, Alice"
+    },
+    "practicalExample": {
+      "title": "An Array of Objects",
+      "scenario": "You are building an e-commerce site and need a list of products.",
+      "explanation": "Combining arrays and objects is the most common data structure in all of programming.",
+      "code": "const cart = [\n  { id: 1, name: \"Apple\", price: 1.50 },\n  { id: 2, name: \"Banana\", price: 0.50 }\n];\n\n// Get the price of the first item\nconsole.log(cart[0].price); // Prints: 1.5"
+    },
+    "commonMistakes": [
+      {
+        "mistake": "Forgetting that arrays are zero-indexed.",
+        "whyItHappens": "Humans count starting from 1. Computers count starting from 0.",
+        "howToFix": "Always remember that the first item in `list` is `list[0]`, the second is `list[1]`, etc.",
+        "incorrectSnippet": "let firstColor = colors[1]; // Gets the SECOND color!",
+        "correctSnippet": "let firstColor = colors[0]; // Gets the FIRST color."
+      }
+    ],
+    "practice": {
+      "title": "Write a Function",
+      "instructions": [
+        "Write a function named `multiply` that takes two parameters: `a` and `b`.",
+        "Make the function `return` the result of `a * b`.",
+        "Call the function with 5 and 4, and log the result."
+      ],
+      "starterCode": "// Write your function here\n",
+      "hint": "function multiply(a, b) { ... }",
+      "solutionCode": "function multiply(a, b) {\n  return a * b;\n}\n\nlet result = multiply(5, 4);\nconsole.log(result);"
+    },
+    "projectConnection": {
+      "title": "Interactive Quiz Project",
+      "description": "Structuring the questions.",
+      "howItApplies": "Your entire quiz will be an Array of Objects, where each object holds a question, the options, and the correct answer."
+    },
+    "quiz": [
+      {
+        "id": "js-l3-q1",
+        "question": "How do you access the first item in an array called `fruits`?",
+        "options": [
+          "fruits[1]",
+          "fruits.first",
+          "fruits[0]",
+          "fruits(0)"
+        ],
+        "correctOptionIndex": 2,
+        "explanation": "Arrays are zero-indexed, so `[0]` gets the first item."
+      },
+      {
+        "id": "js-l3-q2",
+        "question": "What keyword sends a value back out of a function?",
+        "options": [
+          "output",
+          "return",
+          "export",
+          "send"
+        ],
+        "correctOptionIndex": 1,
+        "explanation": "The `return` keyword stops the function and outputs the specified value."
+      },
+      {
+        "id": "js-l3-q3",
+        "question": "Which syntax creates an Object?",
+        "options": [
+          "{ name: \"John\" }",
+          "[\"John\"]",
+          "( name: \"John\" )",
+          "< name=\"John\" >"
+        ],
+        "correctOptionIndex": 0,
+        "explanation": "Objects are created using curly braces `{}` and key-value pairs."
+      }
+    ]
+  },
+  "js-l4": {
+    "id": "js-l4",
+    "courseSlug": "javascript",
+    "title": "DOM Manipulation and Events",
+    "duration": "1h",
+    "introduction": "So far, our JavaScript has only lived in the hidden console. Now it is time to interact with the actual webpage. We will learn how to read HTML, change it, and respond to user clicks.",
+    "learningObjectives": [
+      "Understand the DOM (Document Object Model).",
+      "Select HTML elements using document.querySelector.",
+      "Change text, styles, and classes using JS.",
+      "Attach Event Listeners to respond to clicks and typing."
+    ],
+    "explanation": [
+      {
+        "heading": "WHAT is the DOM?",
+        "paragraphs": [
+          "When the browser loads your HTML, it creates a JavaScript representation of it called the Document Object Model (DOM). You can use JS to change this model, which instantly updates the screen."
+        ]
+      },
+      {
+        "heading": "WHY use Event Listeners?",
+        "paragraphs": [
+          "JavaScript is event-driven. You don't want a script to run immediately and then stop. You want it to wait patiently for the user to do something—like clicking a button—and THEN run code."
+        ]
+      },
+      {
+        "heading": "HOW to select elements?",
+        "paragraphs": [
+          "Use `document.querySelector(\".my-class\")` to find an element using CSS selector syntax. Then you can change its `textContent` or `style`."
+        ]
+      },
+      {
+        "heading": "WHEN to use addEventListener?",
+        "paragraphs": [
+          "Always use `addEventListener` instead of adding `onclick` attributes directly into your HTML. It keeps your JS separate from your HTML, which is cleaner and safer."
+        ]
+      }
+    ],
+    "codeExample": {
+      "language": "javascript",
+      "filename": "dom.js",
+      "explanation": "Selecting a button and a paragraph, and changing the paragraph when the button is clicked.",
+      "code": "// 1. Select the elements\nconst myButton = document.querySelector(\"#btn\");\nconst myText = document.querySelector(\".message\");\n\n// 2. Define the action (Function)\nfunction handleClick() {\n  myText.textContent = \"You clicked the button!\";\n  myText.style.color = \"red\";\n}\n\n// 3. Attach the event listener\nmyButton.addEventListener(\"click\", handleClick);"
+    },
+    "practicalExample": {
+      "title": "A Dark Mode Toggle",
+      "scenario": "You want a button that switches the whole page to dark mode.",
+      "explanation": "Instead of changing inline styles, it is much better to use JS to add a `.dark-mode` class to the body, and let CSS do the actual styling work.",
+      "code": "const themeBtn = document.querySelector(\"#theme-btn\");\n\nthemeBtn.addEventListener(\"click\", function() {\n  // toggle() adds the class if it's missing, or removes it if it's there\n  document.body.classList.toggle(\"dark-mode\");\n});"
+    },
+    "commonMistakes": [
+      {
+        "mistake": "Executing the function in the event listener.",
+        "whyItHappens": "Beginners write `addEventListener(\"click\", handleClick())` with parentheses.",
+        "howToFix": "Pass the function name WITHOUT parentheses. If you use `()`, the function runs immediately when the page loads, not when the click happens!",
+        "incorrectSnippet": "btn.addEventListener(\"click\", doThing());",
+        "correctSnippet": "btn.addEventListener(\"click\", doThing);"
+      }
+    ],
+    "practice": {
+      "title": "Update a Heading",
+      "instructions": [
+        "Use `document.querySelector` to select the `h1` element.",
+        "Change its `textContent` to \"JavaScript is Awesome!\"."
+      ],
+      "starterCode": "// Select and update the h1\n",
+      "hint": "Select \"h1\", then access the .textContent property.",
+      "solutionCode": "const heading = document.querySelector(\"h1\");\nheading.textContent = \"JavaScript is Awesome!\";"
+    },
+    "projectConnection": {
+      "title": "Interactive Quiz Project",
+      "description": "Making the buttons work.",
+      "howItApplies": "You will attach event listeners to the multiple-choice buttons so that clicking them triggers the answer-checking function."
+    },
+    "quiz": [
+      {
+        "id": "js-l4-q1",
+        "question": "Which method selects the FIRST element that matches a CSS selector?",
+        "options": [
+          "document.getSelector()",
+          "document.querySelector()",
+          "document.find()",
+          "document.getAll()"
+        ],
+        "correctOptionIndex": 1,
+        "explanation": "`querySelector` uses standard CSS selectors to find the first matching element."
+      },
+      {
+        "id": "js-l4-q2",
+        "question": "How should you pass a function named `sayHello` to an event listener?",
+        "options": [
+          "btn.addEventListener(\"click\", sayHello());",
+          "btn.addEventListener(\"click\", \"sayHello\");",
+          "btn.addEventListener(\"click\", sayHello);",
+          "btn.onClick(sayHello);"
+        ],
+        "correctOptionIndex": 2,
+        "explanation": "Pass the function reference without parentheses so it executes LATER, on click."
+      },
+      {
+        "id": "js-l4-q3",
+        "question": "Which property safely changes the text inside an HTML element?",
+        "options": [
+          "innerHTML",
+          "textContent",
+          "value",
+          "text"
+        ],
+        "correctOptionIndex": 1,
+        "explanation": "`textContent` is the safest and standard way to change text (avoiding XSS vulnerabilities associated with innerHTML)."
+      }
+    ]
+  },
+  "js-l5": {
+    "id": "js-l5",
+    "courseSlug": "javascript",
+    "title": "Array Methods, Async/Await, and APIs",
+    "duration": "1h",
+    "introduction": "In the modern web, JavaScript rarely works alone. It talks to external servers to fetch live data (like weather or stock prices). In this advanced lesson, we master asynchronous JS and modern array manipulation.",
+    "learningObjectives": [
+      "Use array methods like .map() and .filter().",
+      "Understand the concept of Asynchronous code.",
+      "Use async and await to handle Promises.",
+      "Fetch data from an external API."
+    ],
+    "explanation": [
+      {
+        "heading": "WHAT is Asynchronous Code?",
+        "paragraphs": [
+          "Normally, JS executes line by line (synchronous). But fetching data from a server takes time. Asynchronous code allows JS to pause and wait for the data to arrive without freezing the whole website."
+        ]
+      },
+      {
+        "heading": "WHY use map and filter?",
+        "paragraphs": [
+          "Instead of writing clunky `for` loops, modern JS uses `.map()` to transform an array into a new array, and `.filter()` to keep only items that match a condition."
+        ]
+      },
+      {
+        "heading": "HOW to use fetch()?",
+        "paragraphs": [
+          "The `fetch()` function requests data from a URL. Because it takes time, it returns a \"Promise\". We use the `await` keyword to pause our function until the Promise resolves with the data."
+        ]
+      },
+      {
+        "heading": "WHEN to use async?",
+        "paragraphs": [
+          "Any function that uses the `await` keyword MUST be labeled with the `async` keyword at the very beginning of the function declaration."
+        ]
+      }
+    ],
+    "codeExample": {
+      "language": "javascript",
+      "filename": "async.js",
+      "explanation": "Fetching a random user from a public API and printing their name.",
+      "code": "// The function must be labeled 'async'\nasync function getRandomUser() {\n  try {\n    // Await the server response\n    const response = await fetch(\"https://randomuser.me/api/\");\n    // Await the parsing of the JSON data\n    const data = await response.json();\n    \n    // Access the data\n    const user = data.results[0];\n    console.log(\"Name: \" + user.name.first);\n  } catch (error) {\n    console.log(\"Something went wrong!\", error);\n  }\n}\n\ngetRandomUser();"
+    },
+    "practicalExample": {
+      "title": "Filtering High Scores",
+      "scenario": "You have an array of scores and only want to keep the ones above 50.",
+      "explanation": "Using `.filter()` makes this a one-liner. It returns a brand new array.",
+      "code": "const scores = [20, 85, 40, 95, 10];\n\n// Keep only scores greater than 50\nconst highScores = scores.filter(score => score > 50);\n\nconsole.log(highScores); // Prints: [85, 95]"
+    },
+    "commonMistakes": [
+      {
+        "mistake": "Forgetting to await the .json() parsing.",
+        "whyItHappens": "Beginners remember to `await fetch()`, but forget that parsing the data into JSON is ALSO an asynchronous operation.",
+        "howToFix": "Always write `const data = await response.json();` with the await keyword.",
+        "incorrectSnippet": "const data = response.json();",
+        "correctSnippet": "const data = await response.json();"
+      }
+    ],
+    "practice": {
+      "title": "Map Array to Names",
+      "instructions": [
+        "You have an array of user objects.",
+        "Use `.map()` to create a new array containing ONLY their names."
+      ],
+      "starterCode": "const users = [{name: \"Ali\"}, {name: \"Ben\"}];\n// Create an array called 'names' using .map()\n",
+      "hint": "users.map(user => user.name)",
+      "solutionCode": "const users = [{name: \"Ali\"}, {name: \"Ben\"}];\nconst names = users.map(user => user.name);\nconsole.log(names); // [\"Ali\", \"Ben\"]"
+    },
+    "projectConnection": {
+      "title": "Interactive Quiz Project",
+      "description": "Fetching trivia questions.",
+      "howItApplies": "Instead of hardcoding questions, you will use `fetch()` to pull live questions from a public Trivia API!"
+    },
+    "quiz": [
+      {
+        "id": "js-l5-q1",
+        "question": "Which keyword must be placed before a function declaration if you want to use `await` inside it?",
+        "options": [
+          "promise",
+          "defer",
+          "async",
+          "wait"
+        ],
+        "correctOptionIndex": 2,
+        "explanation": "You can only use `await` inside an `async` function."
+      },
+      {
+        "id": "js-l5-q2",
+        "question": "Which array method creates a NEW array by transforming every item in the original array?",
+        "options": [
+          ".forEach()",
+          ".map()",
+          ".filter()",
+          ".reduce()"
+        ],
+        "correctOptionIndex": 1,
+        "explanation": "`.map()` applies a function to every item and returns a new array of the results."
+      },
+      {
+        "id": "js-l5-q3",
+        "question": "What does the `fetch()` function return?",
+        "options": [
+          "A string",
+          "An array",
+          "A Promise",
+          "HTML"
+        ],
+        "correctOptionIndex": 2,
+        "explanation": "`fetch()` returns a Promise that resolves to the Response object."
+      }
+    ]
   }
-  return true;
-}
-
-function handleFormSubmit(userData) {
-  validateEmail(userData.email); // Stack shows handleFormSubmit -> validateEmail
-}
-
-try {
-  handleFormSubmit({ email: 'invalid-email.com' });
-} catch (error) {
-  console.error('Caught error:', error.message);
-  console.error('Stack trace:', error.stack);
-}`,
-      explanation:
-        'The stack trace displays the chain of function calls leading to the error, making debugging intuitive.',
-      outputDescription: 'Logs the error message and the exact file and line number of each call frame.',
-    },
-    commonMistakes: [
-      {
-        mistake: 'Blocking the single main thread with heavy synchronous loops',
-        whyItHappens: 'Running a synchronous loop of 10,000,000 iterations freezes the browser UI because the single call stack is locked.',
-        howToFix: 'Offload heavy computations to Web Workers or chunk tasks asynchronously using requestAnimationFrame or setTimeout.',
-        incorrectSnippet: `// Freezes browser tab completely
-while (true) {
-  // Infinite loop
-}`,
-        correctSnippet: `// Use asynchronous intervals or workers
-setInterval(() => {
-  // Executes periodically without locking UI
-}, 1000);`,
-      },
-    ],
-    practice: {
-      title: 'Track Call Stack Execution Order',
-      instructions: [
-        'Write three chained functions: `stepOne`, `stepTwo`, and `runPipeline`.',
-        'Have `runPipeline` call `stepOne()`, pass the result to `stepTwo()`, and log the final transformed string.',
-        'Verify how the call stack executes sequentially.',
-      ],
-      starterCode: `function stepOne(text) {
-  // Return text trimmed and in lowercase
-}
-
-function stepTwo(text) {
-  // Prepend "Sanitized: " to text
-}
-
-function runPipeline(input) {
-  // Chain stepOne and stepTwo
-}`,
-      hint: 'Use .trim().toLowerCase() in stepOne, and template literals in stepTwo.',
-      solutionCode: `function stepOne(text) {
-  return text.trim().toLowerCase();
-}
-
-function stepTwo(text) {
-  return \`Sanitized: \${text}\`;
-}
-
-function runPipeline(input) {
-  const cleaned = stepOne(input);
-  const result = stepTwo(cleaned);
-  console.log(result);
-  return result;
-}
-
-runPipeline('   HELLO CLOUD WORLD!   ');`,
-    },
-    projectConnection: {
-      title: 'Performance Profiling in Production Apps',
-      description:
-        'In high-traffic web applications, long tasks on the main thread cause dropped frames (jank) and poor Google Core Web Vitals (Interaction to Next Paint - INP).',
-      howItApplies:
-        'Understanding the single-threaded nature of JavaScript helps you write non-blocking async code, keeping apps running at a smooth 60–120 FPS.',
-    },
-    quiz: [
-      {
-        id: 'js-l1-q1',
-        question: 'Why is JavaScript described as a "single-threaded" language?',
-        options: [
-          'It has a single Call Stack and can execute only one piece of code at a time on the main thread.',
-          'It can only run on computers with a single CPU core.',
-          'It can only handle one user request per hour.',
-          'It only supports one variable at a time.',
-        ],
-        correctOptionIndex: 0,
-        explanation:
-          'JavaScript single-threaded model means it possesses a single call stack, executing one statement at a time in sequence.',
-      },
-      {
-        id: 'js-l1-q2',
-        question: 'Where are objects and non-primitive variables stored in JavaScript engine memory?',
-        options: ['Call Stack', 'Memory Heap', 'DOM Tree', 'Local Storage'],
-        correctOptionIndex: 1,
-        explanation:
-          'The Memory Heap is the unstructured memory allocation zone where objects and complex data structures reside in RAM.',
-      },
-      {
-        id: 'js-l1-q3',
-        question: 'Which entity provides APIs like setTimeout, document, and fetch to JavaScript in the browser?',
-        options: [
-          'The ECMAScript core language specification',
-          'Web Browser Runtime APIs (Host Environment)',
-          'The Linux kernel directly',
-          'The CSS parsing engine',
-        ],
-        correctOptionIndex: 1,
-        explanation:
-          'Features like fetch, DOM manipulation, and timers are Web APIs provided by the host browser environment.',
-      },
-    ],
-  },
-
-  'js-l2': {
-    id: 'js-l2',
-    courseSlug: 'javascript',
-    title: 'Variables: var, let, and const & Temporal Dead Zone',
-    duration: '16 min',
-    introduction:
-      'Modern JavaScript development requires understanding the fundamental differences between var, let, and const. In this lesson, you will master block scoping, variable hoisting, the Temporal Dead Zone (TDZ), and the best-practice rule: default to const, use let when reassigning, and avoid var entirely.',
-    learningObjectives: [
-      'Understand the differences between block scope (let/const) and function scope (var)',
-      'Learn what variable hoisting is and how it behaves across var vs let/const',
-      'Master the Temporal Dead Zone (TDZ) and why accessing let/const before declaration throws a ReferenceError',
-      'Understand that const prevents reassignment of the variable identifier, not mutation of object properties',
-    ],
-    explanation: [
-      {
-        heading: 'Block Scope vs Function Scope',
-        paragraphs: [
-          '• var is function-scoped (or globally scoped). It ignores curly-bracket blocks like if statements or for loops, leaking variables outside.',
-          '• let and const are block-scoped. They are strictly confined inside the nearest enclosing pair of curly brackets { } (such as inside an if, while, or for block).',
-        ],
-      },
-      {
-        heading: 'Hoisting & The Temporal Dead Zone (TDZ)',
-        paragraphs: [
-          'When JavaScript executes, it hoists declarations to the top of their scope during the compilation phase.',
-          'var is hoisted and initialized with the value undefined. If you read a var before its declaration line, you get undefined without an error.',
-          'let and const are hoisted but NOT initialized. The time between the start of the block and the actual declaration line is called the Temporal Dead Zone (TDZ). Accessing a let or const in the TDZ immediately throws a fatal ReferenceError.',
-        ],
-        keyPoints: [
-          'Always declare variables at the top of their scope or before usage.',
-          'Default to const for 90% of variables. Use let only when a value must be reassigned (like loop counters or toggle flags).',
-          'Never use var in modern ES6+ codebases.',
-        ],
-      },
-    ],
-    codeExample: {
-      language: 'javascript',
-      filename: 'scoping-rules.js',
-      code: `// 1. Block Scoping
-if (true) {
-  var leakedVar = 'I leak outside!';
-  let blockLet = 'I stay inside!';
-  const blockConst = 'I also stay inside!';
-}
-
-console.log(leakedVar); // 'I leak outside!' (var ignores if-blocks)
-// console.log(blockLet); // ReferenceError: blockLet is not defined
-
-// 2. const prevents reassignment, but allows object mutation
-const user = { name: 'Alex', role: 'admin' };
-// user = { name: 'Jordan' }; // TypeError: Assignment to constant variable
-user.role = 'superadmin'; // Allowed! Object properties can still mutate
-
-// 3. Temporal Dead Zone (TDZ)
-function demoTDZ() {
-  // console.log(age); // ReferenceError: Cannot access 'age' before initialization
-  let age = 28;
-  console.log(age); // 28
-}`,
-      explanation:
-        'Notice how const prevents variable rebinding, but the contents of arrays and objects assigned to const can still be modified.',
-    },
-    practicalExample: {
-      title: 'The Classic For Loop Variable Leak Bug',
-      scenario: 'Fixing the classic asynchronous for loop closure bug caused by var.',
-      code: `// ❌ Broken with var (var is shared across all iterations)
-for (var i = 1; i <= 3; i++) {
-  setTimeout(() => console.log('var count:', i), 100);
-}
-// Outputs: 4, 4, 4 (because var i is 4 when timeouts fire)
-
-// ✅ Fixed with let (each loop iteration receives a fresh block-scoped binding)
-for (let j = 1; j <= 3; j++) {
-  setTimeout(() => console.log('let count:', j), 100);
-}
-// Outputs: 1, 2, 3`,
-      explanation:
-        'Because let is block-scoped, a new distinct binding of j is created for each loop cycle.',
-      outputDescription: 'Demonstrates why let fixes asynchronous loop binding issues.',
-    },
-    commonMistakes: [
-      {
-        mistake: 'Assuming const makes arrays or objects completely immutable',
-        whyItHappens: 'Confusing variable identifier rebinding with deep value immutability.',
-        howToFix: 'Use Object.freeze() if you need shallow property immutability, or immutable update patterns (spread operator).',
-        incorrectSnippet: `const config = { theme: 'dark' };
-// Developer assumes config cannot be changed anywhere`,
-        correctSnippet: `const config = Object.freeze({ theme: 'dark' });
-// config.theme = 'light'; // Fails silently or throws in strict mode`,
-      },
-    ],
-    practice: {
-      title: 'Refactor Legacy Code to Modern ES6 Scope',
-      instructions: [
-        'Replace all var keywords with appropriate const or let declarations.',
-        'Ensure loop counters use let and static configurations use const.',
-      ],
-      starterCode: `var MAX_RETRIES = 3;
-var currentAttempt = 0;
-
-for (var i = 0; i < MAX_RETRIES; i++) {
-  var attemptStatus = 'attempt_' + i;
-  console.log(attemptStatus);
-}`,
-      hint: 'MAX_RETRIES is constant. i and currentAttempt change value.',
-      solutionCode: `const MAX_RETRIES = 3;
-let currentAttempt = 0;
-
-for (let i = 0; i < MAX_RETRIES; i++) {
-  const attemptStatus = \`attempt_\${i}\`;
-  console.log(attemptStatus);
-}`,
-    },
-    projectConnection: {
-      title: 'Clean Code Standards in Modern Engineering Teams',
-      description:
-        'Enterprise code linters (ESLint) enforce no-var and prefer-const rules. Writing modern let/const code prevents accidental global variable pollution and subtle state mutations.',
-      howItApplies:
-        'In React applications, component state and props are treated as constants to ensure predictable reconciliation cycles.',
-    },
-    quiz: [
-      {
-        id: 'js-l2-q1',
-        question: 'What happens when you try to access a let or const variable before its declaration line in code?',
-        options: [
-          'It returns undefined.',
-          'The engine throws a ReferenceError due to the Temporal Dead Zone (TDZ).',
-          'It creates a global window variable.',
-          'It restarts the script.',
-        ],
-        correctOptionIndex: 1,
-        explanation:
-          'Variables declared with let and const reside in the Temporal Dead Zone until execution reaches their declaration line; accessing them throws a ReferenceError.',
-      },
-      {
-        id: 'js-l2-q2',
-        question: 'What does the const keyword guarantee in JavaScript?',
-        options: [
-          'The variable identifier cannot be reassigned to a new memory address.',
-          'The properties of the object assigned to const are completely frozen and cannot be changed.',
-          'The variable is automatically uploaded to the cloud database.',
-          'The variable is accessible from all browser tabs.',
-        ],
-        correctOptionIndex: 0,
-        explanation:
-          'const prevents reassigning the variable name to another value; however, the internal properties of objects and arrays can still be mutated.',
-      },
-      {
-        id: 'js-l2-q3',
-        question: 'What is the scope of a variable declared with var inside an if block?',
-        options: [
-          'It is scoped strictly to that if block.',
-          'It is scoped to the enclosing function (or global scope if outside a function).',
-          'It is destroyed immediately after the if block ends.',
-          'It can only be used by numbers.',
-        ],
-        correctOptionIndex: 1,
-        explanation:
-          'var is function-scoped and completely ignores block boundaries like if statements or while loops.',
-      },
-    ],
-  },
 };
